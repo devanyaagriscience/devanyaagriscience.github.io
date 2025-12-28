@@ -1,11 +1,11 @@
 export const products = [
   {
     id: 1,
-    name: "Organic Fertilizer Premium",
+    name: "Bio-Active Fertilizer Premium",
     category: "Fertilizers",
     image: "/products/fertilizer1.jpg", // Placeholder path
-    description: "High-quality organic fertilizer enriched with micronutrients for enhanced crop yield.",
-    features: ["100% Organic", "Slow Release", "Rich in NPK"]
+    description: "High-quality sustainable fertilizer enriched with micronutrients for enhanced crop yield.",
+    features: ["Eco-Safe", "Slow Release", "Rich in NPK"]
   },
   {
     id: 2,
@@ -66,7 +66,7 @@ export const testimonials = [
     id: 1,
     name: "Rajesh Kumar",
     role: "Wheat Farmer, Punjab",
-    content: "Using Devanya's Organic Fertilizer Premium has increased my yield by 25%. The soil quality has visibly improved.",
+    content: "Using Devanya's Bio-Active Fertilizer Premium has increased my yield by 25%. The soil quality has visibly improved.",
     avatar: "https://randomuser.me/api/portraits/men/32.jpg"
   },
   {
@@ -79,7 +79,7 @@ export const testimonials = [
   {
     id: 3,
     name: "Suresh Patil",
-    role: "Organic Farmer, Maharashtra",
+    role: "Progressive Farmer, Maharashtra",
     content: "I appreciate their commitment to sustainable farming. The bio-pesticides work effectively without harming the ecosystem.",
     avatar: "https://randomuser.me/api/portraits/men/67.jpg"
   }
@@ -88,8 +88,8 @@ export const testimonials = [
 export const faqs = [
   {
     id: 1,
-    question: "Are your products 100% organic?",
-    answer: "Yes, our 'Organic Series' products are certified 100% organic. We also offer integrated pest management solutions that are eco-friendly."
+    question: "Are your products environmentally safe?",
+    answer: "Yes, our 'Bio-Active Series' products are certified eco-safe. We also offer integrated pest management solutions that are eco-friendly."
   },
   {
     id: 2,

@@ -28,7 +28,7 @@ const Hero = () => {
                             </span>
                         </h1>
                         <p className="text-xl text-gray-600 mb-8 max-w-lg leading-relaxed">
-                            Empowering farmers with advanced organic solutions and expert agronomy to maximize yield while preserving nature.
+                            Empowering farmers with advanced sustainable solutions and expert agronomy to maximize yield while preserving nature.
                         </p>
                         <div className="flex flex-wrap gap-4">
                             <Link to="/products" className="btn btn-primary shadow-lg shadow-green-900/20 group">
@@ -51,7 +51,7 @@ const Hero = () => {
                             </div>
                             <div>
                                 <h3 className="text-3xl font-bold text-[var(--color-primary)]">100%</h3>
-                                <p className="text-sm text-gray-500 font-medium">Organic Inputs</p>
+                                <p className="text-sm text-gray-500 font-medium">Quality Inputs</p>
                             </div>
                         </div>
                     </motion.div>

@@ -96,7 +96,7 @@ const Home = () => {
                         <div className="aspect-square rounded-[3rem] bg-white/5 backdrop-blur-md border border-white/10 p-12 flex flex-col items-center justify-center relative z-10 transform rotate-3 hover:rotate-0 transition-transform duration-500">
                             <div className="text-center">
                                 <h3 className="text-6xl font-bold text-[var(--color-accent)] mb-4">100%</h3>
-                                <p className="text-2xl text-white font-light">Organic Solutions</p>
+                                <p className="text-2xl text-white font-light">Sustainable Solutions</p>
                             </div>
                         </div>
                         <div className="absolute inset-0 border-2 border-[var(--color-accent)] rounded-[3rem] transform -rotate-3 z-0 opacity-30"></div>

@@ -16,7 +16,7 @@ const Footer = () => {
                             </span>
                         </Link>
                         <p className="text-gray-400 mb-6 leading-relaxed">
-                            Pioneering sustainable agriculture through innovation and organic excellence. Helping farmers feed the world, responsibly.
+                            Pioneering sustainable agriculture through innovation and agricultural excellence. Helping farmers feed the world, responsibly.
                         </p>
                         <div className="flex gap-4">
                             <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[var(--color-primary)] transition-colors">
@@ -57,20 +57,24 @@ const Footer = () => {
                         </ul>
                     </div>
 
-                    {/* Newsletter */}
+                    {/* Business Hours */}
                     <div>
-                        <h4 className="text-xl font-bold mb-6 text-white font-heading">Newsletter</h4>
-                        <p className="text-gray-400 mb-4">Subscribe to receive updates on new products and farming tips.</p>
-                        <form className="flex flex-col gap-3" onSubmit={(e) => e.preventDefault()}>
-                            <input
-                                type="email"
-                                placeholder="Your email address"
-                                className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 focus:outline-none focus:border-[var(--color-accent)] text-white placeholder-gray-500 transition-colors"
-                            />
-                            <button type="submit" className="btn btn-accent w-full justify-center">
-                                Subscribe <Send className="w-4 h-4" />
-                            </button>
-                        </form>
+                        <h4 className="text-xl font-bold mb-6 text-white font-heading">Business Hours</h4>
+                        <p className="text-gray-400 mb-4">Visit our center for expert consultation.</p>
+                        <ul className="space-y-3 text-gray-400">
+                            <li className="flex justify-between">
+                                <span>Monday - Friday</span>
+                                <span className="text-white">9:00 AM - 6:00 PM</span>
+                            </li>
+                            <li className="flex justify-between">
+                                <span>Saturday</span>
+                                <span className="text-white">9:00 AM - 4:00 PM</span>
+                            </li>
+                            <li className="flex justify-between">
+                                <span>Sunday</span>
+                                <span className="text-[var(--color-accent)]">Closed</span>
+                            </li>
+                        </ul>
                     </div>
                 </div>
 

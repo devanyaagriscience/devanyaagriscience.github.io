@@ -45,7 +45,7 @@ const Products = () => {
                         transition={{ delay: 0.1 }}
                         className="max-w-xl mx-auto text-gray-300 text-lg"
                     >
-                        Browse our range of high-performance, organic agricultural inputs verified for quality and sustainability.
+                        Browse our range of high-performance, sustainable agricultural inputs verified for quality and sustainability.
                     </motion.p>
                 </div>
             </div>

@@ -5,17 +5,51 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const Contact = () => {
     const [formStatus, setFormStatus] = useState('idle'); // idle, submitting, success, error
+    const [errorMessage, setErrorMessage] = useState('');
     const [openFaq, setOpenFaq] = useState(null);
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setFormStatus('idle');
+        setErrorMessage('');
+
+        const formData = new FormData(e.target);
+        const email = formData.get('email');
+        const phone = formData.get('phone');
+
+        // Validation: Either Email or Phone
+        if (!email && !phone) {
+            setFormStatus('error');
+            setErrorMessage('Please provide either an email address or a phone number.');
+            return;
+        }
+
+        // Validation: Phone format if provided
+        if (phone) {
+            if (!phone.startsWith('+91')) {
+                setFormStatus('error');
+                setErrorMessage('Mobile number must start with +91');
+                return;
+            }
+            if (phone.length < 13) { // +91 + 10 digits = 13
+                setFormStatus('error');
+                setErrorMessage('Please enter a valid mobile number starting with +91');
+                return;
+            }
+        }
+
         setFormStatus('submitting');
 
-        // Simulate API call
+        // NOTE: To implement actual mailing facility on a static site:
+        // Option 1: Use EmailJS (https://www.emailjs.com/) - Free tier available, works client-side.
+        // Option 2: Use Formspree (https://formspree.io/) - Simple form backend, just change <form> action.
+
+        // Simulating API call for now
         setTimeout(() => {
             setFormStatus('success');
             // Reset after 3 seconds
             setTimeout(() => setFormStatus('idle'), 3000);
+            e.target.reset();
         }, 1500);
     };
 
@@ -122,25 +156,41 @@ const Contact = () => {
                                 </motion.div>
                             )}
 
+                            {formStatus === 'error' && (
+                                <motion.div
+                                    initial={{ opacity: 0, y: -10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    className="bg-red-50 text-red-600 p-4 rounded-xl border border-red-100 text-sm mb-4"
+                                >
+                                    {errorMessage}
+                                </motion.div>
+                            )}
+
                             <div className="grid md:grid-cols-2 gap-6">
                                 <div>
                                     <label className="block text-sm font-semibold text-gray-700 mb-2">First Name</label>
-                                    <input type="text" required className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[var(--color-primary)] focus:ring-4 focus:ring-green-50 outline-none transition-all" />
+                                    <input type="text" name="firstName" required className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[var(--color-primary)] focus:ring-4 focus:ring-green-50 outline-none transition-all" />
                                 </div>
                                 <div>
                                     <label className="block text-sm font-semibold text-gray-700 mb-2">Last Name</label>
-                                    <input type="text" required className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[var(--color-primary)] focus:ring-4 focus:ring-green-50 outline-none transition-all" />
+                                    <input type="text" name="lastName" required className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[var(--color-primary)] focus:ring-4 focus:ring-green-50 outline-none transition-all" />
                                 </div>
                             </div>
 
-                            <div>
-                                <label className="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
-                                <input type="email" required className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[var(--color-primary)] focus:ring-4 focus:ring-green-50 outline-none transition-all" />
+                            <div className="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <label className="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
+                                    <input type="email" name="email" className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[var(--color-primary)] focus:ring-4 focus:ring-green-50 outline-none transition-all" placeholder="Optional if phone provided" />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-semibold text-gray-700 mb-2">Phone Number</label>
+                                    <input type="tel" name="phone" className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[var(--color-primary)] focus:ring-4 focus:ring-green-50 outline-none transition-all" placeholder="+91..." />
+                                </div>
                             </div>
 
                             <div>
                                 <label className="block text-sm font-semibold text-gray-700 mb-2">Subject</label>
-                                <select className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[var(--color-primary)] focus:ring-4 focus:ring-green-50 outline-none transition-all bg-white">
+                                <select name="subject" className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[var(--color-primary)] focus:ring-4 focus:ring-green-50 outline-none transition-all bg-white">
                                     <option>General Inquiry</option>
                                     <option>Product Support</option>
                                     <option>Sales & Partnerships</option>
@@ -150,7 +200,7 @@ const Contact = () => {
 
                             <div>
                                 <label className="block text-sm font-semibold text-gray-700 mb-2">Message</label>
-                                <textarea rows="4" required className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[var(--color-primary)] focus:ring-4 focus:ring-green-50 outline-none transition-all resize-none"></textarea>
+                                <textarea name="message" rows="4" required className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[var(--color-primary)] focus:ring-4 focus:ring-green-50 outline-none transition-all resize-none"></textarea>
                             </div>
 
                             <button
@@ -159,8 +209,11 @@ const Contact = () => {
                                 className={`btn btn-primary w-full py-4 text-lg justify-center shadow-lg hover:shadow-xl transition-all ${formStatus === 'submitting' ? 'opacity-70 cursor-not-allowed' : ''}`}
                             >
                                 {formStatus === 'submitting' ? 'Sending...' : 'Send Message'}
-                                {!formStatus === 'submitting' && <Send className="w-5 h-5 ml-2" />}
+                                {formStatus !== 'submitting' && <Send className="w-5 h-5 ml-2" />}
                             </button>
+                            <p className="text-xs text-gray-500 text-center mt-4">
+                                * Either Email or Phone (+91) is required.
+                            </p>
                         </form>
                     </div>
 

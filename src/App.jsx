@@ -4,8 +4,9 @@ import Layout from './components/Layout';
 import ScrollToTop from './components/ScrollToTop';
 import Home from './pages/Home';
 import Products from './pages/Products';
-import Services from './pages/Services';
 import About from './pages/About';
+import FAQ from './pages/FAQ';
+import Careers from './pages/Careers';
 import Contact from './pages/Contact';
 
 function App() {
@@ -16,8 +17,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products />} />
-          <Route path="/services" element={<Services />} />
           <Route path="/about" element={<About />} />
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/careers" element={<Careers />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </Layout>

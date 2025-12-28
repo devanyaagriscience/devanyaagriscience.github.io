@@ -26,9 +26,10 @@ const Navbar = () => {
     const navLinks = [
         { name: 'Home', path: '/' },
         { name: 'Products', path: '/products' },
-        { name: 'Services', path: '/services' },
         { name: 'About Us', path: '/about' },
-        { name: 'Contact', path: '/contact' },
+        { name: 'Contact Us', path: '/contact' },
+        { name: 'FAQs', path: '/faq' },
+        { name: 'Careers', path: '/careers' },
     ];
 
     const isActive = (path) => location.pathname === path;
@@ -65,7 +66,7 @@ const Navbar = () => {
                                 </Link>
                             ))}
                             <Link to="/contact" className="btn btn-primary text-sm px-6 py-2.5 shadow-lg shadow-green-900/20">
-                                Get Quote
+                                Contact Us
                             </Link>
                         </div>
                     </div>

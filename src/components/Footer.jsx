@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Facebook, Twitter, Instagram, Linkedin, Send } from 'lucide-react';
+import { Facebook, Twitter, Instagram, Linkedin, Youtube, Send } from 'lucide-react';
+import { companyInfo } from '../data/mockData';
 
 const Footer = () => {
     return (
@@ -12,48 +13,49 @@ const Footer = () => {
                         <Link to="/" className="flex items-center gap-2 mb-6">
                             <img src="/assets/images/logo.JPG" alt="Devanya Agri Science Logo" className="h-8 w-8 rounded-full object-cover" />
                             <span className="font-heading font-bold text-2xl tracking-tight">
-                                Devanya<span className="text-[var(--color-accent)]">Agri Science</span>
+                                Devanya<span className="text-[var(--color-accent)]"> Agri Science</span>
                             </span>
                         </Link>
                         <p className="text-gray-400 mb-6 leading-relaxed">
                             Pioneering sustainable agriculture through innovation and agricultural excellence. Helping farmers feed the world, responsibly.
                         </p>
                         <div className="flex gap-4">
-                            <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[var(--color-primary)] transition-colors">
+                            <a href={companyInfo.social.facebook} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[var(--color-primary)] transition-colors">
                                 <Facebook className="w-5 h-5" />
                             </a>
-                            <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[var(--color-primary)] transition-colors">
+                            <a href={companyInfo.social.twitter} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[var(--color-primary)] transition-colors">
                                 <Twitter className="w-5 h-5" />
                             </a>
-                            <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[var(--color-primary)] transition-colors">
+                            <a href={companyInfo.social.instagram} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[var(--color-primary)] transition-colors">
                                 <Instagram className="w-5 h-5" />
                             </a>
-                            <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[var(--color-primary)] transition-colors">
+                            <a href={companyInfo.social.linkedin} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[var(--color-primary)] transition-colors">
                                 <Linkedin className="w-5 h-5" />
+                            </a>
+                            <a href={companyInfo.social.youtube} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[var(--color-primary)] transition-colors">
+                                <Youtube className="w-5 h-5" />
                             </a>
                         </div>
                     </div>
 
-                    {/* Quick Links */}
                     <div>
                         <h4 className="text-xl font-bold mb-6 text-white font-heading">Quick Links</h4>
                         <ul className="space-y-4">
                             <li><Link to="/" className="text-gray-400 hover:text-[var(--color-accent)] transition-colors">Home</Link></li>
                             <li><Link to="/products" className="text-gray-400 hover:text-[var(--color-accent)] transition-colors">Our Products</Link></li>
-                            <li><Link to="/services" className="text-gray-400 hover:text-[var(--color-accent)] transition-colors">Services</Link></li>
                             <li><Link to="/about" className="text-gray-400 hover:text-[var(--color-accent)] transition-colors">About Us</Link></li>
+                            <li><Link to="/faq" className="text-gray-400 hover:text-[var(--color-accent)] transition-colors">FAQ</Link></li>
+                            <li><Link to="/careers" className="text-gray-400 hover:text-[var(--color-accent)] transition-colors">Careers</Link></li>
                             <li><Link to="/contact" className="text-gray-400 hover:text-[var(--color-accent)] transition-colors">Contact</Link></li>
                         </ul>
                     </div>
 
-                    {/* Contact Info */}
                     <div>
                         <h4 className="text-xl font-bold mb-6 text-white font-heading">Contact Us</h4>
                         <ul className="space-y-4 text-gray-400">
-                            <li>123 Green Valley, Agri Park</li>
-                            <li>Nashik, Maharashtra, India</li>
-                            <li className="pt-2"><a href="tel:+919876543210" className="hover:text-white">+91 98765 43210</a></li>
-                            <li><a href="mailto:info@devanyaagriscience.com" className="hover:text-white">info@devanyaagriscience.com</a></li>
+                            <li>{companyInfo.address}</li>
+                            <li className="pt-2"><a href={`tel:${companyInfo.phone}`} className="hover:text-white">{companyInfo.phone}</a></li>
+                            <li><a href={`mailto:${companyInfo.email}`} className="hover:text-white">{companyInfo.email}</a></li>
                         </ul>
                     </div>
 

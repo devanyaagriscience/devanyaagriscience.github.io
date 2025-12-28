@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import QuickContact from './QuickContact';
 
 const Layout = ({ children }) => {
     const { pathname } = useLocation();
@@ -16,6 +17,7 @@ const Layout = ({ children }) => {
             <main className="flex-grow pt-20">
                 {children}
             </main>
+            <QuickContact />
             <Footer />
         </div>
     );

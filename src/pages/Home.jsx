@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Hero from '../components/Hero';
-import { ArrowRight, CheckCircle, Microscope, Sprout, Signal, Star, Quote } from 'lucide-react';
-import { services, testimonials } from '../data/mockData';
+import { ArrowRight, CheckCircle, Microscope, Sprout, Signal, Star, Quote, Beaker, Droplets, Users, Trees, Activity } from 'lucide-react';
+import { services, testimonials, researchAreas, sustainabilityData } from '../data/mockData';
 import { motion } from 'framer-motion';
 
 const iconMap = {
@@ -26,37 +26,13 @@ const Home = () => {
                         transition={{ duration: 0.6 }}
                         className="text-center max-w-3xl mx-auto mb-16"
                     >
-                        <span className="text-[var(--color-primary)] font-bold tracking-wider uppercase text-sm bg-green-50 px-3 py-1 rounded-full">Our Expertise</span>
-                        <h2 className="text-3xl md:text-5xl font-bold mt-4 mb-6 text-[var(--color-text)]">Why Choose Devanya?</h2>
-                        <p className="text-gray-600 text-lg leading-relaxed">We bring over two decades of expertise in agricultural science, delivering proven results for farmers across the region with sustainable and innovative practices.</p>
+                        <span className="text-[var(--color-primary)] font-bold tracking-wider uppercase text-sm bg-green-50 px-3 py-1 rounded-full">Our Excellence</span>
+                        <h2 className="text-3xl md:text-5xl font-bold mt-4 mb-6 text-[var(--color-text)]">Rooted in Science, Defined by Purity</h2>
+                        <p className="text-gray-600 text-lg leading-relaxed">As a leading producer of grain seeds, we are dedicated to delivering the highest quality agricultural inputs, ensuring every seed fulfills its promise of purity and productivity.</p>
                     </motion.div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        {services.slice(0, 3).map((service, index) => {
-                            const Icon = iconMap[service.icon] || Sprout;
-                            return (
-                                <motion.div
-                                    key={service.id}
-                                    initial={{ opacity: 0, y: 30 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ duration: 0.5, delay: index * 0.2 }}
-                                    className="p-8 rounded-[2rem] bg-white border border-gray-100 hover:shadow-xl hover:shadow-green-900/5 transition-all duration-300 group"
-                                >
-                                    <div className="w-16 h-16 bg-[var(--color-primary)]/5 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-[var(--color-primary)] transition-colors duration-300">
-                                        <Icon className="w-8 h-8 text-[var(--color-primary)] group-hover:text-white transition-colors duration-300" />
-                                    </div>
-                                    <h3 className="text-xl font-bold mb-4 group-hover:text-[var(--color-primary)] transition-colors">{service.title}</h3>
-                                    <p className="text-gray-600 mb-8 leading-relaxed">{service.description}</p>
-                                    <Link to="/services" className="text-[var(--color-primary)] font-bold flex items-center hover:gap-3 transition-all">
-                                        Learn More <ArrowRight className="w-4 h-4 ml-2" />
-                                    </Link>
-                                </motion.div>
-                            );
-                        })}
-                    </div>
                 </div>
             </section>
+
 
             {/* Mission Strip */}
             <section className="py-24 bg-[#0f2f1c] text-white relative overflow-hidden">
@@ -101,6 +77,40 @@ const Home = () => {
                         </div>
                         <div className="absolute inset-0 border-2 border-[var(--color-accent)] rounded-[3rem] transform -rotate-3 z-0 opacity-30"></div>
                     </motion.div>
+                </div>
+            </section>
+
+            {/* Sustainability Stats */}
+            <section className="section bg-white">
+                <div className="container mx-auto px-4">
+                    <div className="text-center mb-16">
+                        <span className="text-[var(--color-primary)] font-bold tracking-wider uppercase text-sm">Our Impact</span>
+                        <h2 className="text-3xl md:text-5xl font-bold mt-4">Pledging for a Greener Tomorrow</h2>
+                    </div>
+
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+                        {[
+                            { label: 'Water Saved', value: sustainabilityData.waterSaved, icon: Droplets, color: 'text-blue-500' },
+                            { label: 'Farmers Impacted', value: sustainabilityData.farmersImpacted, icon: Users, color: 'text-green-500' },
+                            { label: 'CO2 Reduction', value: sustainabilityData.carbonReduction, icon: Activity, color: 'text-emerald-500' },
+                            { label: 'Trees Planted', value: sustainabilityData.treesPlanted, icon: Trees, color: 'text-orange-500' },
+                        ].map((stat, index) => (
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, scale: 0.5 }}
+                                whileInView={{ opacity: 1, scale: 1 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.5, delay: index * 0.1 }}
+                                className="text-center p-8 rounded-3xl bg-gray-50 border border-gray-100 hover:shadow-xl transition-all"
+                            >
+                                <div className={`w-12 h-12 mx-auto mb-4 flex items-center justify-center rounded-2xl bg-white shadow-sm ${stat.color}`}>
+                                    <stat.icon className="w-6 h-6" />
+                                </div>
+                                <h3 className="text-2xl md:text-4xl font-bold text-gray-800 mb-2">{stat.value}</h3>
+                                <p className="text-gray-500 font-medium">{stat.label}</p>
+                            </motion.div>
+                        ))}
+                    </div>
                 </div>
             </section>
 

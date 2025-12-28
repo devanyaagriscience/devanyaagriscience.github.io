@@ -28,7 +28,7 @@ const Hero = () => {
                             </span>
                         </h1>
                         <p className="text-xl text-gray-600 mb-8 max-w-lg leading-relaxed">
-                            Empowering farmers with advanced sustainable solutions and expert agronomy to maximize yield while preserving nature.
+                            Empowering farmers with <strong>research-driven innovation</strong>, advanced sustainable solutions, and expert agronomy to maximize yield while preserving nature.
                         </p>
                         <div className="flex flex-wrap gap-4">
                             <Link to="/products" className="btn btn-primary shadow-lg shadow-green-900/20 group">

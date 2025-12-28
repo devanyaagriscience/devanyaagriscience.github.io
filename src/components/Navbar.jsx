@@ -43,7 +43,7 @@ const Navbar = () => {
                             <img src="/assets/images/logo.JPG" alt="Devanya Agri Science Logo" className="h-10 w-10 rounded-full object-cover" />
                         </div>
                         <span className="font-heading font-bold text-xl sm:text-2xl text-[var(--color-primary)] tracking-tight">
-                            Devanya<span className="text-[var(--color-accent)]">Agri Science</span>
+                            Devanya<span className="text-[var(--color-accent)]"> Agri Science</span>
                         </span>
                     </Link>
 

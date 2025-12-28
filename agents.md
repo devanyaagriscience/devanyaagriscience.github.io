@@ -1,5 +1,4 @@
-Make the site to be available in hindi and english.
-Also, allow the user to switch between languages.
+Make the site to have toggle for hindi and english to allow the user to switch between languages. English should be default. Hindi should be translated for all the content. 
 
 Also add the toggle for dark mode and light mode and default to system mode.
 

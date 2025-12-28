@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Wheat } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
@@ -39,11 +39,11 @@ const Navbar = () => {
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
                     <Link to="/" className="flex items-center gap-2 group">
-                        <div className="bg-[var(--color-primary)] p-2 rounded-lg text-white group-hover:scale-110 transition-transform">
-                            <Wheat className="h-6 w-6" />
+                        <div className="bg-transparent p-1 rounded-lg">
+                            <img src="/assets/images/logo.JPG" alt="Devanya Agri Science Logo" className="h-10 w-10 rounded-full object-cover" />
                         </div>
                         <span className="font-heading font-bold text-xl sm:text-2xl text-[var(--color-primary)] tracking-tight">
-                            Devanya<span className="text-[var(--color-accent)]">Agri</span>
+                            Devanya<span className="text-[var(--color-accent)]">Agri Science</span>
                         </span>
                     </Link>
 

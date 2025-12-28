@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Facebook, Twitter, Instagram, Linkedin, Wheat, Send } from 'lucide-react';
+import { Facebook, Twitter, Instagram, Linkedin, Send } from 'lucide-react';
 
 const Footer = () => {
     return (
@@ -10,9 +10,9 @@ const Footer = () => {
                     {/* Brand Column */}
                     <div>
                         <Link to="/" className="flex items-center gap-2 mb-6">
-                            <Wheat className="h-8 w-8 text-[var(--color-accent)]" />
+                            <img src="/assets/images/logo.JPG" alt="Devanya Agri Science Logo" className="h-8 w-8 rounded-full object-cover" />
                             <span className="font-heading font-bold text-2xl tracking-tight">
-                                Devanya<span className="text-[var(--color-accent)]">Agri</span>
+                                Devanya<span className="text-[var(--color-accent)]">Agri Science</span>
                             </span>
                         </Link>
                         <p className="text-gray-400 mb-6 leading-relaxed">

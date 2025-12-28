@@ -19,24 +19,24 @@ const Hero = () => {
                     >
                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-50 text-[var(--color-primary)] font-semibold text-sm mb-6 border border-green-100">
                             <Leaf className="w-4 h-4" />
-                            <span>Sustainable Agriculture Solutions</span>
+                            <span>Premium Grain Seeds Producer</span>
                         </div>
                         <h1 className="text-5xl lg:text-7xl font-bold mb-6 leading-tight text-[var(--color-primary-dark)]">
-                            Cultivating the <br />
+                            Every Seed, <br />
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)]">
-                                Future of Farming
+                                A Promise of Purity
                             </span>
                         </h1>
                         <p className="text-xl text-gray-600 mb-8 max-w-lg leading-relaxed">
-                            Empowering farmers with <strong>research-driven innovation</strong>, advanced sustainable solutions, and expert agronomy to maximize yield while preserving nature.
+                            A leading producer of <strong>all kinds of grain seeds</strong>, committed to delivering agricultural excellence and scientific innovation to every farm.
                         </p>
                         <div className="flex flex-wrap gap-4">
                             <Link to="/products" className="btn btn-primary shadow-lg shadow-green-900/20 group">
-                                Explore Products
+                                Explore Our Seeds
                                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                             </Link>
-                            <Link to="/services" className="btn btn-outline hover:bg-[var(--color-primary)] hover:border-[var(--color-primary)]">
-                                Our Services
+                            <Link to="/about" className="btn btn-outline hover:bg-[var(--color-primary)] hover:border-[var(--color-primary)]">
+                                About Devanya
                             </Link>
                         </div>
 

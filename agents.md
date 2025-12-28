@@ -1,3 +1,31 @@
+Make the site to be available in hindi and english.
+Also, allow the user to switch between languages.
+
+Also add the toggle for dark mode and light mode and default to system mode.
+
+Separate the mock data from single file to purpose specific files under data folder and update its usage accordingly.
+
+Get product types and their images from public/assets/images/products and read the images and populate the products page. Add some good descriptions about the product as dummy.
+
+Use the images from assets folder for products and update the paths accordingly.
+
+Also, add sections for Media with photos and videos of events. Also add milestones with timelines. Also add page for careers. 
+
+For all the products, tag to their type such paddy, onion, etc based on the category instead of saying "grain seeds" for all.
+
+Update the social media links in the contact us page and remove faqs from there since we already have a faq page.
+
+Also enable mailing service to send the contact us form data to our email.
+
+Update the Our Leadership Team: Mr. Brijesh Maurya, Founder and CEO. (For now use no image just icon)
+
+
+On the homepage, "Certified Quality" section has no media, generate some good media for it preferably video. 
+
+
+Each product photo has both sides front and back, make sure to show both sides in carousel when clicked on learn more / view details. Only show the front side in the grid view. 
+
+
 Update all the info as per below: 
 
 ```Devanya Agri Science
@@ -18,11 +46,3 @@ LinkedIn: https://www.linkedin.com/company/devanyaagriscience
 Instagram: https://www.instagram.com/devanyaagriscience
 YouTube: https://www.youtube.com/@DevanyaAgriScience
 ```
-
-Get product types and their images from public/assets/images/products and read the images and populate the products page
-
-Also, add sections for events with timelines. Also add page for careers. Add testimonials section.
-
-Separate FAQ section and add it as a separate page.
-
-Remove services page, we do not provide services. Update the home screen accordingly.

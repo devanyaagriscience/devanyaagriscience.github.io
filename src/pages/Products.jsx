@@ -99,9 +99,17 @@ const Products = () => {
                                 className="bg-white rounded-[2rem] shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 group flex flex-col h-full"
                             >
                                 <div className="h-72 bg-gray-50 relative overflow-hidden">
-                                    {/* Image Placeholder */}
-                                    <div className="absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
-                                        <ShoppingBag className="w-16 h-16 text-gray-300 opacity-30 group-hover:scale-110 transition-transform duration-500" />
+                                    <img
+                                        src={product.image}
+                                        alt={product.name}
+                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                        onError={(e) => {
+                                            e.target.style.display = 'none';
+                                            e.target.nextSibling.style.display = 'flex';
+                                        }}
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center hidden">
+                                        <ShoppingBag className="w-16 h-16 text-gray-300 opacity-30" />
                                     </div>
 
                                     <div className="absolute top-6 left-6 z-10">
@@ -200,10 +208,21 @@ const Products = () => {
                                 <X className="w-6 h-6 text-gray-800" />
                             </button>
 
-                            <div className="bg-gray-50 min-h-[400px] md:h-full relative flex items-center justify-center p-20">
-                                <ShoppingBag className="w-48 h-48 text-gray-200" />
-                                <div className="absolute bottom-10 left-1/2 -translate-x-1/2">
-                                    <span className="bg-white px-6 py-2 rounded-full shadow-lg text-sm font-black text-[var(--color-primary)] uppercase tracking-widest">
+                            <div className="bg-gray-50 min-h-[400px] md:h-full relative flex items-center justify-center p-0 overflow-hidden">
+                                <img
+                                    src={selectedProduct.image}
+                                    alt={selectedProduct.name}
+                                    className="w-full h-full object-contain md:object-cover"
+                                    onError={(e) => {
+                                        e.target.style.display = 'none';
+                                        e.target.nextSibling.style.display = 'flex';
+                                    }}
+                                />
+                                <div className="absolute inset-0 bg-gray-50 flex items-center justify-center hidden">
+                                    <ShoppingBag className="w-48 h-48 text-gray-200" />
+                                </div>
+                                <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10">
+                                    <span className="bg-white/90 backdrop-blur-md px-6 py-2 rounded-full shadow-lg text-sm font-black text-[var(--color-primary)] uppercase tracking-widest">
                                         Verified Quality
                                     </span>
                                 </div>

@@ -1,5 +1,5 @@
 import { Target, Heart, ShieldCheck, Award, Users, TrendingUp, Calendar, MapPin } from 'lucide-react';
-import { milestones, events } from '../data/mockData';
+import { milestones, events, testimonials } from '../data/mockData';
 import { motion } from 'framer-motion';
 
 const About = () => {
@@ -110,45 +110,93 @@ const About = () => {
                 </div>
             </section>
 
-            {/* Events Section */}
+            {/* Events Timeline Section */}
             <section className="section bg-white overflow-hidden">
                 <div className="container mx-auto px-4">
                     <div className="text-center mb-20">
                         <span className="text-[var(--color-primary)] font-bold tracking-wider uppercase text-sm">Our Presence</span>
-                        <h2 className="text-3xl md:text-5xl font-bold mt-4">Events & Engagements</h2>
-                        <p className="text-gray-500 mt-6 text-lg max-w-2xl mx-auto">We actively participate in agricultural fairs, farmer meets, and scientific seminars to stay connected with the farming community.</p>
+                        <h2 className="text-3xl md:text-5xl font-bold mt-4">Events & Engagements Timeline</h2>
+                        <p className="text-gray-500 mt-6 text-lg max-w-2xl mx-auto">Track our journey through field days, seminars, and community meets across the country.</p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        {events.map((event, index) => (
-                            <motion.div
-                                key={event.id}
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.5, delay: index * 0.1 }}
-                                className="group bg-gray-50 rounded-[2.5rem] overflow-hidden border border-gray-100 hover:shadow-2xl transition-all duration-500"
-                            >
-                                <div className="h-64 relative overflow-hidden">
-                                    <img
-                                        src={event.image}
-                                        alt={event.title}
-                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                                    />
-                                    <div className="absolute top-4 left-4">
-                                        <div className="bg-white/90 backdrop-blur-md px-4 py-2 rounded-2xl flex items-center gap-2 shadow-sm">
-                                            <Calendar className="w-4 h-4 text-[var(--color-primary)]" />
-                                            <span className="text-xs font-bold text-gray-800">{event.date}</span>
+                    <div className="relative max-w-4xl mx-auto">
+                        {/* Vertical line mapping through events */}
+                        <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-green-100 hidden md:block"></div>
+
+                        <div className="space-y-16 md:space-y-32">
+                            {events.map((event, index) => (
+                                <motion.div
+                                    key={event.id}
+                                    initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true }}
+                                    className={`relative flex flex-col items-center ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}
+                                >
+                                    {/* Content Card */}
+                                    <div className="w-full md:w-5/12">
+                                        <div className="bg-gray-50 p-8 rounded-[2.5rem] shadow-sm hover:shadow-xl transition-all border border-gray-100 group">
+                                            <div className="h-48 rounded-2xl overflow-hidden mb-6">
+                                                <img src={event.image} alt={event.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                                            </div>
+                                            <div className="flex items-center gap-2 text-[var(--color-primary)] mb-2 font-bold text-sm">
+                                                <Calendar className="w-4 h-4" />
+                                                <span>{event.date}</span>
+                                            </div>
+                                            <h3 className="text-2xl font-bold mb-3">{event.title}</h3>
+                                            <div className="flex items-center gap-2 text-gray-500 mb-4 text-xs font-bold uppercase tracking-widest">
+                                                <MapPin className="w-4 h-4" />
+                                                <span>{event.location}</span>
+                                            </div>
+                                            <p className="text-gray-600 leading-relaxed">{event.description}</p>
                                         </div>
                                     </div>
+
+                                    {/* Timeline Node */}
+                                    <div className="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-[var(--color-primary)] rounded-full border-4 border-white shadow-lg hidden md:block z-10"></div>
+
+                                    {/* Spacer for empty side */}
+                                    <div className="hidden md:block md:w-5/12"></div>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Testimonials Section */}
+            <section className="section bg-[var(--color-surface)]">
+                <div className="container mx-auto px-4">
+                    <div className="text-center mb-16">
+                        <span className="text-[var(--color-primary)] font-bold tracking-wider uppercase text-sm">Farmer Voices</span>
+                        <h2 className="text-3xl md:text-5xl font-bold mt-4">The Promise Delivered</h2>
+                    </div>
+
+                    <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                        {testimonials.map((t, i) => (
+                            <motion.div
+                                key={t.id}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: i * 0.1 }}
+                                className="bg-white p-10 rounded-[2.5rem] shadow-sm border border-gray-100 relative"
+                            >
+                                <div className="flex text-yellow-500 mb-6">
+                                    {[...Array(5)].map((_, i) => (
+                                        <svg key={i} className="w-5 h-5 fill-current" viewBox="0 0 20 20">
+                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                        </svg>
+                                    ))}
                                 </div>
-                                <div className="p-8">
-                                    <div className="flex items-center gap-2 text-[var(--color-primary)] mb-4">
-                                        <MapPin className="w-4 h-4" />
-                                        <span className="text-xs font-bold uppercase tracking-widest">{event.location}</span>
+                                <p className="text-gray-600 text-lg italic mb-8 leading-relaxed">"{t.content}"</p>
+                                <div className="flex items-center gap-4">
+                                    <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-green-100">
+                                        <img src={t.avatar} alt={t.name} className="w-full h-full object-cover" />
                                     </div>
-                                    <h3 className="text-2xl font-bold mb-4 group-hover:text-[var(--color-primary)] transition-colors">{event.title}</h3>
-                                    <p className="text-gray-600 leading-relaxed mb-6">{event.description}</p>
+                                    <div>
+                                        <h4 className="font-bold text-gray-800">{t.name}</h4>
+                                        <p className="text-sm text-gray-500">{t.role}</p>
+                                    </div>
                                 </div>
                             </motion.div>
                         ))}
@@ -157,11 +205,11 @@ const About = () => {
             </section>
 
             {/* Leadership Section */}
-            <section className="section bg-gray-50">
+            <section className="section bg-white">
                 <div className="container mx-auto px-4">
                     <div className="text-center mb-16">
                         <span className="text-[var(--color-primary)] font-bold tracking-wider uppercase text-sm">The Visionaries</span>
-                        <h2 className="text-3xl md:text-4xl font-bold mt-4">Our Leadership Team</h2>
+                        <h2 className="text-3xl md:text-5xl font-bold mt-4">Our Leadership Team</h2>
                     </div>
 
                     <div className="grid md:grid-cols-3 gap-12 max-w-5xl mx-auto">

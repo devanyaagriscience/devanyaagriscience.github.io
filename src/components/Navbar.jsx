@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import GoogleTranslate from './GoogleTranslate';
+import ThemeToggle from './ThemeToggle';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -69,6 +70,7 @@ const Navbar = () => {
                             <div className="scale-90 origin-left">
                                 <GoogleTranslate />
                             </div>
+                            <ThemeToggle />
                             <Link to="/contact" className="btn btn-primary text-sm px-6 py-2.5 shadow-lg shadow-green-900/20">
                                 Contact Us
                             </Link>
@@ -80,6 +82,7 @@ const Navbar = () => {
                         <div className="scale-90">
                             <GoogleTranslate />
                         </div>
+                        <ThemeToggle />
                         <button
                             onClick={toggleMenu}
                             className="p-2 rounded-md text-[var(--color-text)] hover:text-[var(--color-primary)] focus:outline-none"

@@ -1,7 +1,3 @@
-Make the site to have toggle for hindi and english to allow the user to switch between languages. English should be default. Hindi should be translated for all the content. 
-
-Also add the toggle for dark mode and light mode and default to system mode.
-
 Separate the mock data from single file to purpose specific files under data folder and update its usage accordingly.
 
 Get product types and their images from public/assets/images/products and read the images and populate the products page. Add some good descriptions about the product as dummy.
@@ -12,6 +8,9 @@ Also, add sections for Media with photos and videos of events. Also add mileston
 
 For all the products, tag to their type such paddy, onion, etc based on the category instead of saying "grain seeds" for all.
 
+Each product photo has both sides front and back, make sure to show both sides in carousel when clicked on learn more / view details. Only show the front side in the grid view. 
+
+
 Update the social media links in the contact us page and remove faqs from there since we already have a faq page.
 
 Also enable mailing service to send the contact us form data to our email.
@@ -21,8 +20,6 @@ Update the Our Leadership Team: Mr. Brijesh Maurya, Founder and CEO. (For now us
 
 On the homepage, "Certified Quality" section has no media, generate some good media for it preferably video. 
 
-
-Each product photo has both sides front and back, make sure to show both sides in carousel when clicked on learn more / view details. Only show the front side in the grid view. 
 
 
 Update all the info as per below: 

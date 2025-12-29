@@ -69,9 +69,6 @@ const Navbar = () => {
                             <div className="scale-90 origin-left">
                                 <GoogleTranslate />
                             </div>
-                            <a href="tel:1800-571-2333" className="btn btn-primary text-sm px-6 py-2.5 shadow-lg shadow-green-900/20">
-                                Call Us
-                            </a>
                         </div>
                     </div>
 

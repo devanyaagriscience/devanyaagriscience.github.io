@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
-import { Search, Filter, ChevronDown, Download, Leaf, Droplets, Sun, Info, X, ShoppingBag, ArrowRight, Star } from 'lucide-react';
+import { Search, Filter, ChevronDown, Download, Leaf, Droplets, Sun, Info, X, ShoppingBag, ArrowRight, Star, ChevronLeft, ChevronRight } from 'lucide-react';
 import { products } from '../data/products';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -10,6 +10,26 @@ const Products = () => {
     const [activeCategory, setActiveCategory] = useState(categoryParam || 'All');
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedProduct, setSelectedProduct] = useState(null);
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+    const openModal = (product) => {
+        setSelectedProduct(product);
+        setCurrentImageIndex(0);
+    };
+
+    const nextImage = (e) => {
+        e.stopPropagation();
+        if (selectedProduct && selectedProduct.images.length > 1) {
+            setCurrentImageIndex((prev) => (prev + 1) % selectedProduct.images.length);
+        }
+    };
+
+    const prevImage = (e) => {
+        e.stopPropagation();
+        if (selectedProduct && selectedProduct.images.length > 1) {
+            setCurrentImageIndex((prev) => (prev - 1 + selectedProduct.images.length) % selectedProduct.images.length);
+        }
+    };
 
     const categories = ['All', ...new Set(products.map(p => p.category))];
 
@@ -100,7 +120,7 @@ const Products = () => {
                             >
                                 <div className="h-72 bg-gray-50 relative overflow-hidden">
                                     <img
-                                        src={product.image}
+                                        src={product.images && product.images.length > 0 ? product.images[0] : product.image}
                                         alt={product.name}
                                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                         onError={(e) => {
@@ -121,7 +141,7 @@ const Products = () => {
                                     {/* Quick View Button */}
                                     <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[2px]">
                                         <button
-                                            onClick={() => setSelectedProduct(product)}
+                                            onClick={() => openModal(product)}
                                             className="bg-white text-[var(--color-primary-dark)] px-6 py-3 rounded-xl font-bold shadow-xl transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 hover:bg-[var(--color-primary)] hover:text-white"
                                         >
                                             View Details
@@ -144,7 +164,7 @@ const Products = () => {
 
                                         <div className="pt-6 border-t border-gray-50 flex items-center justify-between">
                                             <button
-                                                onClick={() => setSelectedProduct(product)}
+                                                onClick={() => openModal(product)}
                                                 className="text-[var(--color-primary)] font-bold text-sm flex items-center gap-2 hover:gap-3 transition-all"
                                             >
                                                 Learn More <ArrowRight className="w-4 h-4" />
@@ -208,11 +228,12 @@ const Products = () => {
                                 <X className="w-6 h-6 text-gray-800" />
                             </button>
 
-                            <div className="bg-gray-50 min-h-[400px] md:h-full relative flex items-center justify-center p-0 overflow-hidden">
+                            <div className="bg-gray-50 min-h-[400px] md:h-full relative flex items-center justify-center p-0 overflow-hidden group/image">
                                 <img
-                                    src={selectedProduct.image}
+                                    src={selectedProduct.images && selectedProduct.images.length > 0 ? selectedProduct.images[currentImageIndex] : selectedProduct.image}
                                     alt={selectedProduct.name}
-                                    className="w-full h-full object-contain md:object-cover"
+                                    className="w-full h-full object-contain md:object-cover transition-opacity duration-300"
+                                    key={currentImageIndex}
                                     onError={(e) => {
                                         e.target.style.display = 'none';
                                         e.target.nextSibling.style.display = 'flex';
@@ -221,7 +242,38 @@ const Products = () => {
                                 <div className="absolute inset-0 bg-gray-50 flex items-center justify-center hidden">
                                     <ShoppingBag className="w-48 h-48 text-gray-200" />
                                 </div>
-                                <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10">
+                                <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 w-full flex justify-center gap-2">
+                                    {selectedProduct.images && selectedProduct.images.length > 1 && (
+                                        <div className="flex gap-2 bg-black/20 backdrop-blur-sm p-1 rounded-full">
+                                            {selectedProduct.images.map((_, idx) => (
+                                                <button
+                                                    key={idx}
+                                                    onClick={(e) => { e.stopPropagation(); setCurrentImageIndex(idx); }}
+                                                    className={`w-2 h-2 rounded-full transition-all ${currentImageIndex === idx ? 'bg-white w-4' : 'bg-white/50 hover:bg-white/80'}`}
+                                                />
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
+
+                                {selectedProduct.images && selectedProduct.images.length > 1 && (
+                                    <>
+                                        <button
+                                            onClick={prevImage}
+                                            className="absolute left-4 top-1/2 -translate-y-1/2 p-2 bg-white/80 hover:bg-white rounded-full shadow-lg opacity-0 group-hover/image:opacity-100 transition-opacity"
+                                        >
+                                            <ChevronLeft className="w-6 h-6 text-gray-800" />
+                                        </button>
+                                        <button
+                                            onClick={nextImage}
+                                            className="absolute right-4 top-1/2 -translate-y-1/2 p-2 bg-white/80 hover:bg-white rounded-full shadow-lg opacity-0 group-hover/image:opacity-100 transition-opacity"
+                                        >
+                                            <ChevronRight className="w-6 h-6 text-gray-800" />
+                                        </button>
+                                    </>
+                                )}
+
+                                <div className="absolute top-6 left-6 z-10">
                                     <span className="bg-white/90 backdrop-blur-md px-6 py-2 rounded-full shadow-lg text-sm font-black text-[var(--color-primary)] uppercase tracking-widest">
                                         Verified Quality
                                     </span>

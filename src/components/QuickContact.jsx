@@ -43,7 +43,7 @@ const QuickContact = () => {
                                 </div>
                                 <div>
                                     <p className="font-semibold text-sm">Call Expert</p>
-                                    <p className="text-xs text-blue-600/70">Mon-Sat, 9am-6pm</p>
+                                    <p className="text-xs text-blue-600/70">Mon-Sat, 10am-6pm</p>
                                 </div>
                             </a>
                         </div>

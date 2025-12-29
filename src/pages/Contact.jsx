@@ -130,7 +130,7 @@ const Contact = () => {
                             <Phone className="w-6 h-6" />
                         </div>
                         <h3 className="text-xl font-bold text-gray-800 mb-2">Call Us</h3>
-                        <p className="text-gray-500 mb-4 text-sm">Mon-Sat from 9am to 6pm</p>
+                        <p className="text-gray-500 mb-4 text-sm">Mon-Sat from 10am to 6pm</p>
                         <p className="text-lg font-bold text-[var(--color-primary)]">{companyInfo.phone}</p>
                     </motion.a>
 

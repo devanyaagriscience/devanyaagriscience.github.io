@@ -212,7 +212,7 @@ const About = () => {
                             >
                                 <div className="w-48 h-48 mx-auto mb-6 rounded-[2.5rem] overflow-hidden border-4 border-white shadow-xl flex items-center justify-center bg-gray-100">
                                     {member.image ? (
-                                        <img src={member.image} alt={member.name} className="w-full h-full object-cover" />
+                                        <img src={member.image} alt={member.name} className="w-full h-full object-cover object-top" />
                                     ) : (
                                         <Users className="w-20 h-20 text-gray-400" />
                                     )}

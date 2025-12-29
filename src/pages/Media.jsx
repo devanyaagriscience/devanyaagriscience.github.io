@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Image, Play, Calendar, MapPin } from 'lucide-react';
+import Carousel from '../components/Carousel';
+import { events } from '../data/events';
 
 const Media = () => {
     const [activeTab, setActiveTab] = useState('photos');
@@ -132,27 +134,29 @@ const Media = () => {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -20 }}
-                            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
                         >
-                            {photos.map((photo, index) => (
-                                <div key={photo.id} className="group relative overflow-hidden rounded-[2rem] shadow-sm hover:shadow-xl transition-all duration-300 bg-white">
-                                    <div className="h-64 overflow-hidden">
-                                        <img
-                                            src={photo.url}
-                                            alt={photo.caption}
-                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                                        />
-                                    </div>
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90"></div>
-                                    <div className="absolute bottom-0 left-0 p-8 text-white w-full">
-                                        <h3 className="text-xl font-bold mb-2">{photo.caption}</h3>
-                                        <div className="flex items-center gap-4 text-xs font-medium text-gray-300 uppercase tracking-wider">
-                                            <span className="flex items-center gap-1"><MapPin className="w-3 h-3" /> {photo.location}</span>
-                                            <span className="flex items-center gap-1"><Calendar className="w-3 h-3" /> {photo.date}</span>
+                            <Carousel
+                                items={photos}
+                                renderItem={(photo) => (
+                                    <div className="group relative overflow-hidden rounded-[2rem] shadow-sm hover:shadow-xl transition-all duration-300 bg-white h-full">
+                                        <div className="h-64 overflow-hidden">
+                                            <img
+                                                src={photo.url}
+                                                alt={photo.caption}
+                                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                            />
+                                        </div>
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90"></div>
+                                        <div className="absolute bottom-0 left-0 p-8 text-white w-full">
+                                            <h3 className="text-xl font-bold mb-2 line-clamp-2">{photo.caption}</h3>
+                                            <div className="flex items-center gap-4 text-xs font-medium text-gray-300 uppercase tracking-wider">
+                                                <span className="flex items-center gap-1"><MapPin className="w-3 h-3" /> {photo.location}</span>
+                                                <span className="flex items-center gap-1"><Calendar className="w-3 h-3" /> {photo.date}</span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            ))}
+                                )}
+                            />
                         </motion.div>
                     ) : (
                         <motion.div
@@ -160,32 +164,85 @@ const Media = () => {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -20 }}
-                            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
                         >
-                            {videos.map((video, index) => (
-                                <div key={video.id} className="group cursor-pointer">
-                                    <div className="relative rounded-[2rem] overflow-hidden mb-4 shadow-lg">
-                                        <img
-                                            src={video.thumbnail}
-                                            alt={video.title}
-                                            className="w-full h-56 object-cover"
-                                        />
-                                        <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/30 transition-colors">
-                                            <div className="w-14 h-14 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/40 group-hover:scale-110 transition-transform">
-                                                <Play className="w-6 h-6 text-white fill-current ml-1" />
+                            <Carousel
+                                items={videos}
+                                renderItem={(video) => (
+                                    <div className="group cursor-pointer h-full">
+                                        <div className="relative rounded-[2rem] overflow-hidden mb-4 shadow-lg">
+                                            <img
+                                                src={video.thumbnail}
+                                                alt={video.title}
+                                                className="w-full h-56 object-cover"
+                                            />
+                                            <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/30 transition-colors">
+                                                <div className="w-14 h-14 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/40 group-hover:scale-110 transition-transform">
+                                                    <Play className="w-6 h-6 text-white fill-current ml-1" />
+                                                </div>
                                             </div>
+                                            <span className="absolute bottom-4 right-4 bg-black/70 text-white text-xs font-bold px-2 py-1 rounded-lg">
+                                                {video.duration}
+                                            </span>
                                         </div>
-                                        <span className="absolute bottom-4 right-4 bg-black/70 text-white text-xs font-bold px-2 py-1 rounded-lg">
-                                            {video.duration}
-                                        </span>
+                                        <h3 className="text-lg font-bold text-gray-800 mb-1 group-hover:text-[var(--color-primary)] transition-colors line-clamp-2">{video.title}</h3>
+                                        <p className="text-sm text-gray-500">{video.views} • Uploaded recently</p>
                                     </div>
-                                    <h3 className="text-lg font-bold text-gray-800 mb-1 group-hover:text-[var(--color-primary)] transition-colors">{video.title}</h3>
-                                    <p className="text-sm text-gray-500">{video.views} • Uploaded recently</p>
-                                </div>
-                            ))}
+                                )}
+                            />
                         </motion.div>
                     )}
                 </AnimatePresence>
+
+                {/* Events Timeline Section */}
+                <div className="mt-32">
+                    <div className="text-center mb-20">
+                        <span className="text-[var(--color-primary)] font-bold tracking-wider uppercase text-sm">Our Presence</span>
+                        <h2 className="text-3xl md:text-5xl font-bold mt-4">Events & Engagements Timeline</h2>
+                        <p className="text-gray-500 mt-6 text-lg max-w-2xl mx-auto">Track our journey through field days, seminars, and community meets across the country.</p>
+                    </div>
+
+                    <div className="relative max-w-4xl mx-auto">
+                        {/* Vertical line mapping through events */}
+                        <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-green-100 hidden md:block"></div>
+
+                        <div className="space-y-16 md:space-y-32">
+                            {events.map((event, index) => (
+                                <motion.div
+                                    key={event.id}
+                                    initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true }}
+                                    className={`relative flex flex-col items-center ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}
+                                >
+                                    {/* Content Card */}
+                                    <div className="w-full md:w-5/12">
+                                        <div className="bg-gray-50 p-8 rounded-[2.5rem] shadow-sm hover:shadow-xl transition-all border border-gray-100 group">
+                                            <div className="h-48 rounded-2xl overflow-hidden mb-6">
+                                                <img src={event.image} alt={event.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                                            </div>
+                                            <div className="flex items-center gap-2 text-[var(--color-primary)] mb-2 font-bold text-sm">
+                                                <Calendar className="w-4 h-4" />
+                                                <span>{event.date}</span>
+                                            </div>
+                                            <h3 className="text-2xl font-bold mb-3">{event.title}</h3>
+                                            <div className="flex items-center gap-2 text-gray-500 mb-4 text-xs font-bold uppercase tracking-widest">
+                                                <MapPin className="w-4 h-4" />
+                                                <span>{event.location}</span>
+                                            </div>
+                                            <p className="text-gray-600 leading-relaxed">{event.description}</p>
+                                        </div>
+                                    </div>
+
+                                    {/* Timeline Node */}
+                                    <div className="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-[var(--color-primary)] rounded-full border-4 border-white shadow-lg hidden md:block z-10"></div>
+
+                                    {/* Spacer for empty side */}
+                                    <div className="hidden md:block md:w-5/12"></div>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     );

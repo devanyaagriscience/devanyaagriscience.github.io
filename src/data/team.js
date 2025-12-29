@@ -2,6 +2,6 @@ export const teamMembers = [
     {
         name: "Mr. Brijesh Maurya",
         role: "Founder and CEO",
-        image: null
+        image: "/assets/images/brijesh-founder-ceo.png"
     }
 ];

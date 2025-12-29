@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
-import { products } from '../data/mockData';
-import { Filter, Star, Search, X, ShoppingBag, Download, ArrowRight } from 'lucide-react';
+import { Search, Filter, ChevronDown, Download, Leaf, Droplets, Sun, Info, X, ShoppingBag, ArrowRight, Star } from 'lucide-react';
+import { products } from '../data/products';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Products = () => {

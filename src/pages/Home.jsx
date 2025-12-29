@@ -1,8 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Hero from '../components/Hero';
-import { ArrowRight, CheckCircle, Microscope, Sprout, Signal, Star, Quote, Beaker, Droplets, Users, Trees, Activity } from 'lucide-react';
-import { services, testimonials, researchAreas, sustainabilityData } from '../data/mockData';
+import { ArrowRight, CheckCircle, Microscope, Sprout, Signal, Quote, Beaker, Droplets, Users, Trees, Activity, Star } from 'lucide-react';
+import { products } from '../data/products';
+import { services } from '../data/services';
+import { testimonials } from '../data/testimonials';
+import { researchAreas } from '../data/research';
+import { sustainabilityData } from '../data/sustainability';
 import { motion } from 'framer-motion';
 
 const iconMap = {

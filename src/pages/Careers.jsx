@@ -2,35 +2,16 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Briefcase, MapPin, Clock, ArrowRight, Star, Heart, Zap, Globe } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { jobOpenings, cultureValues } from '../data/careers';
+
+const iconMap = {
+    Zap: Zap,
+    Heart: Heart,
+    Globe: Globe,
+    Star: Star
+};
 
 const Careers = () => {
-    const openings = [
-        {
-            id: 1,
-            title: "Agronomy Specialist",
-            department: "R&D / Technical Support",
-            location: "Jalna, MS",
-            type: "Full-time",
-            description: "Provide expert technical guidance to farmers and conduct on-field crop trials."
-        },
-        {
-            id: 2,
-            title: "Sales Executive",
-            department: "Sales & Marketing",
-            location: "Maharashtra (Multiple Locations)",
-            type: "Full-time",
-            description: "Drive market share for our seeds and maintain strong relationships with distributors."
-        },
-        {
-            id: 3,
-            title: "Quality Control Analyst",
-            department: "Production",
-            location: "Bhokardan, Jalna",
-            type: "Full-time",
-            description: "Ensure every seed meets our strict purity and germination standards."
-        }
-    ];
-
     return (
         <div className="pt-20">
             {/* Hero Section */}
@@ -59,24 +40,22 @@ const Careers = () => {
                     </div>
 
                     <div className="grid md:grid-cols-4 gap-8">
-                        {[
-                            { title: 'Innovation First', desc: 'Work with the latest in seed technology.', icon: Zap, color: 'text-amber-500', bg: 'bg-amber-50' },
-                            { title: 'Farmer Impact', desc: 'Directly contribute to rural prosperity.', icon: Heart, color: 'text-rose-500', bg: 'bg-rose-50' },
-                            { title: 'Global Standards', desc: 'Export-quality processes and ethics.', icon: Globe, color: 'text-blue-500', bg: 'bg-blue-50' },
-                            { title: 'Growth Mindset', desc: 'Continuous learning and leadership.', icon: Star, color: 'text-green-500', bg: 'bg-green-50' },
-                        ].map((item, index) => (
-                            <motion.div
-                                key={index}
-                                whileHover={{ y: -10 }}
-                                className="p-8 rounded-[2.5rem] bg-gray-50 border border-transparent hover:border-gray-100 transition-all text-center"
-                            >
-                                <div className={`${item.bg} ${item.color} w-16 h-16 rounded-[1.5rem] flex items-center justify-center mx-auto mb-6 shadow-sm`}>
-                                    <item.icon className="w-8 h-8" />
-                                </div>
-                                <h3 className="text-xl font-bold mb-4">{item.title}</h3>
-                                <p className="text-gray-600 text-sm leading-relaxed">{item.desc}</p>
-                            </motion.div>
-                        ))}
+                        {cultureValues.map((item, index) => {
+                            const Icon = iconMap[item.icon];
+                            return (
+                                <motion.div
+                                    key={index}
+                                    whileHover={{ y: -10 }}
+                                    className="p-8 rounded-[2.5rem] bg-gray-50 border border-transparent hover:border-gray-100 transition-all text-center"
+                                >
+                                    <div className={`${item.bg} ${item.color} w-16 h-16 rounded-[1.5rem] flex items-center justify-center mx-auto mb-6 shadow-sm`}>
+                                        <Icon className="w-8 h-8" />
+                                    </div>
+                                    <h3 className="text-xl font-bold mb-4">{item.title}</h3>
+                                    <p className="text-gray-600 text-sm leading-relaxed">{item.desc}</p>
+                                </motion.div>
+                            );
+                        })}
                     </div>
                 </div>
             </section>
@@ -89,11 +68,11 @@ const Careers = () => {
                             <span className="text-[var(--color-primary)] font-bold tracking-wider uppercase text-sm">Opportunities</span>
                             <h2 className="text-3xl md:text-5xl font-bold mt-4">Explore Open Roles</h2>
                         </div>
-                        <p className="text-gray-500 font-medium">Showing {openings.length} current openings</p>
+                        <p className="text-gray-500 font-medium">Showing {jobOpenings.length} current openings</p>
                     </div>
 
                     <div className="space-y-6 max-w-5xl mx-auto">
-                        {openings.map((job) => (
+                        {jobOpenings.map((job) => (
                             <motion.div
                                 key={job.id}
                                 initial={{ opacity: 0, x: -20 }}

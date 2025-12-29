@@ -1,7 +1,7 @@
 import React from 'react';
 import { MessageCircle, Phone, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { companyInfo } from '../data/mockData';
+import { companyInfo } from '../data/companyInfo';
 
 const QuickContact = () => {
     const [isOpen, setIsOpen] = React.useState(false);

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Send, Facebook, Twitter, Instagram, Linkedin, Youtube, Check } from 'lucide-react';
-import { companyInfo } from '../data/mockData';
+import { companyInfo } from '../data/companyInfo';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Contact = () => {

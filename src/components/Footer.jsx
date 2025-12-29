@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Facebook, Twitter, Instagram, Linkedin, Youtube, Send } from 'lucide-react';
-import { companyInfo } from '../data/mockData';
+import { companyInfo } from '../data/companyInfo';
 
 const Footer = () => {
     return (

@@ -1,5 +1,8 @@
 import { Target, Heart, ShieldCheck, Award, Users, TrendingUp, Calendar, MapPin } from 'lucide-react';
-import { milestones, events, testimonials } from '../data/mockData';
+import { milestones } from '../data/milestones';
+import { events } from '../data/events';
+import { testimonials } from '../data/testimonials';
+import { teamMembers } from '../data/team';
 import { motion } from 'framer-motion';
 
 const About = () => {
@@ -213,18 +216,18 @@ const About = () => {
                     </div>
 
                     <div className="grid md:grid-cols-3 gap-12 max-w-5xl mx-auto">
-                        {[
-                            { name: "Dr. Vikram Singh", role: "Founder & Chairman", image: "https://randomuser.me/api/portraits/men/85.jpg" },
-                            { name: "Mrs. Meera Patel", role: "Managing Director", image: "https://randomuser.me/api/portraits/women/65.jpg" },
-                            { name: "Mr. Rajan Deshmukh", role: "Chief Scientist", image: "https://randomuser.me/api/portraits/men/45.jpg" }
-                        ].map((member, index) => (
+                        {teamMembers.map((member, index) => (
                             <motion.div
                                 key={index}
                                 whileHover={{ scale: 1.05 }}
                                 className="text-center"
                             >
-                                <div className="w-48 h-48 mx-auto mb-6 rounded-[2.5rem] overflow-hidden border-4 border-white shadow-xl">
-                                    <img src={member.image} alt={member.name} className="w-full h-full object-cover" />
+                                <div className="w-48 h-48 mx-auto mb-6 rounded-[2.5rem] overflow-hidden border-4 border-white shadow-xl flex items-center justify-center bg-gray-100">
+                                    {member.image ? (
+                                        <img src={member.image} alt={member.name} className="w-full h-full object-cover" />
+                                    ) : (
+                                        <Users className="w-20 h-20 text-gray-400" />
+                                    )}
                                 </div>
                                 <h4 className="text-xl font-bold text-gray-800">{member.name}</h4>
                                 <p className="text-[var(--color-primary)] font-medium mb-4">{member.role}</p>

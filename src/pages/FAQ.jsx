@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, Minus, Search, HelpCircle, MessageCircle } from 'lucide-react';
-import { faqs } from '../data/mockData';
+import { faqs } from '../data/faqs';
 import { Link } from 'react-router-dom';
 
 const FAQ = () => {

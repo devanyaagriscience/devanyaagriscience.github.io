@@ -1,4 +1,5 @@
-import { Target, Heart, ShieldCheck, Award, Users, TrendingUp, Calendar, MapPin } from 'lucide-react';
+import React from 'react';
+import { Target, Heart, ShieldCheck, Award, Users, TrendingUp, Calendar, MapPin, Globe, Leaf, CheckCircle, Flag } from 'lucide-react';
 import { milestones } from '../data/milestones';
 import { events } from '../data/events';
 import { testimonials } from '../data/testimonials';
@@ -112,6 +113,46 @@ const About = () => {
                     </div>
                 </div>
             </section>
+
+            {/* Milestones Section */}
+            <div className="py-24 bg-white relative overflow-hidden">
+                <div className="container mx-auto px-4 relative z-10">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="text-center mb-16"
+                    >
+                        <span className="text-[var(--color-primary)] font-bold tracking-wider uppercase text-sm">Our Journey</span>
+                        <h2 className="text-4xl font-bold text-gray-800 mt-2">Milestones & Achievements</h2>
+                    </motion.div>
+
+                    <div className="relative max-w-4xl mx-auto">
+                        <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gray-100 hidden md:block"></div>
+
+                        {milestones.map((item, index) => (
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: index * 0.1 }}
+                                className={`flex flex-col md:flex-row items-center justify-between mb-12 w-full ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}
+                            >
+                                <div className="w-full md:w-5/12"></div>
+                                <div className="z-10 bg-[var(--color-primary)] text-white rounded-full w-12 h-12 flex items-center justify-center font-bold shadow-lg border-4 border-white mb-4 md:mb-0">
+                                    <Flag className="w-5 h-5" />
+                                </div>
+                                <div className={`w-full md:w-5/12 bg-gray-50 p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all ${index % 2 === 0 ? 'text-left md:text-right' : 'text-left'}`}>
+                                    <span className="text-[var(--color-primary)] font-black text-2xl block mb-2">{item.year}</span>
+                                    <h3 className="text-xl font-bold text-gray-800 mb-2">{item.title}</h3>
+                                    <p className="text-gray-600">{item.description}</p>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </div>
 
             {/* Events Timeline Section */}
             <section className="section bg-white overflow-hidden">

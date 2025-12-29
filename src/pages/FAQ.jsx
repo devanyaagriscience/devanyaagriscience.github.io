@@ -7,15 +7,21 @@ import { Link } from 'react-router-dom';
 const FAQ = () => {
     const [activeIndex, setActiveIndex] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
+    const [activeCategory, setActiveCategory] = useState('All');
 
     const toggleFAQ = (index) => {
         setActiveIndex(activeIndex === index ? null : index);
     };
 
-    const filteredFaqs = faqs.filter(faq =>
-        faq.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        faq.answer.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const categories = ['All', 'Farmers', 'Wholesalers', 'General'];
+
+    const filteredFaqs = faqs.filter(faq => {
+        const matchesSearch = faq.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            faq.answer.toLowerCase().includes(searchTerm.toLowerCase());
+        const matchesCategory = activeCategory === 'All' || faq.category === activeCategory;
+
+        return matchesSearch && matchesCategory;
+    });
 
     return (
         <div className="pt-20">
@@ -61,6 +67,23 @@ const FAQ = () => {
             {/* FAQ Accordion */}
             <section className="section bg-gray-50">
                 <div className="container mx-auto px-4 max-w-4xl">
+
+                    {/* Category Tabs */}
+                    <div className="flex flex-wrap gap-4 justify-center mb-12">
+                        {categories.map((cat) => (
+                            <button
+                                key={cat}
+                                onClick={() => setActiveCategory(cat)}
+                                className={`px-6 py-2 rounded-full text-sm font-bold transition-all ${activeCategory === cat
+                                        ? 'bg-[var(--color-primary)] text-white shadow-lg scale-105'
+                                        : 'bg-white text-gray-500 hover:bg-gray-100'
+                                    }`}
+                            >
+                                {cat}
+                            </button>
+                        ))}
+                    </div>
+
                     {filteredFaqs.length > 0 ? (
                         <div className="space-y-4">
                             {filteredFaqs.map((faq, index) => (
@@ -72,19 +95,22 @@ const FAQ = () => {
                                     className="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden"
                                 >
                                     <button
-                                        onClick={() => toggleFAQ(index)}
+                                        onClick={() => toggleFAQ(faq.id)} // Use ID instead of Index to avoid bugs when filtering
                                         className="w-full px-8 py-6 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
                                     >
                                         <div className="flex items-center gap-4">
                                             <div className="w-10 h-10 bg-green-50 rounded-xl flex items-center justify-center text-[var(--color-primary)]">
                                                 <HelpCircle className="w-5 h-5" />
                                             </div>
-                                            <span className="text-xl font-bold text-gray-800">{faq.question}</span>
+                                            <div>
+                                                <span className="text-xs font-bold text-[var(--color-primary)] tracking-wider uppercase mb-1 block">{faq.category}</span>
+                                                <span className="text-xl font-bold text-gray-800">{faq.question}</span>
+                                            </div>
                                         </div>
-                                        {activeIndex === index ? <Minus className="text-[var(--color-primary)]" /> : <Plus className="text-gray-400" />}
+                                        {activeIndex === faq.id ? <Minus className="text-[var(--color-primary)]" /> : <Plus className="text-gray-400" />}
                                     </button>
                                     <AnimatePresence>
-                                        {activeIndex === index && (
+                                        {activeIndex === faq.id && (
                                             <motion.div
                                                 initial={{ height: 0, opacity: 0 }}
                                                 animate={{ height: 'auto', opacity: 1 }}
@@ -108,7 +134,7 @@ const FAQ = () => {
                             </div>
                             <h3 className="text-2xl font-bold text-gray-800 mb-2">No results found</h3>
                             <p className="text-gray-500">We couldn't find any answers matching your search term.</p>
-                            <button onClick={() => setSearchTerm('')} className="mt-6 text-[var(--color-primary)] font-bold">Clear search</button>
+                            <button onClick={() => { setSearchTerm(''); setActiveCategory('All'); }} className="mt-6 text-[var(--color-primary)] font-bold">Clear filters</button>
                         </div>
                     )}
                 </div>

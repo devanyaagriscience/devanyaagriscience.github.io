@@ -1,6 +1,6 @@
 export const sustainabilityData = {
     villagesCovered: "500+",
-    farmersConnected: "10,000+",
-    retailPartners: "250+",
+    farmersConnected: "5,000+",
+    retailPartners: "100+",
     varietiesLaunched: "15+"
 };

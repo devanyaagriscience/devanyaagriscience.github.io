@@ -62,19 +62,28 @@ const Hero = () => {
                         transition={{ duration: 0.8, delay: 0.2 }}
                         className="relative"
                     >
-                        <div className="relative z-10 rounded-[2.5rem] overflow-hidden shadow-2xl shadow-green-900/10 border-4 border-white">
-                            {/* Placeholder for Hero Image - In a real app, use a high quality image */}
-                            <div className="bg-gray-200 h-[600px] w-full flex items-center justify-center relative bg-[url('https://images.unsplash.com/photo-1625246333195-58f21a408730?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center">
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                                <div className="absolute bottom-8 left-8 right-8 text-white p-6 glass-card rounded-2xl border-0 bg-white/10 backdrop-blur-md">
-                                    <div className="flex items-center gap-4 mb-2">
-                                        <div className="p-2 bg-[var(--color-accent)] rounded-full">
-                                            <ShieldCheck className="w-6 h-6 text-white" />
-                                        </div>
-                                        <div>
-                                            <p className="font-bold text-lg">Certified Quality</p>
-                                            <p className="text-sm text-gray-200">International Standards</p>
-                                        </div>
+                        <div className="relative z-10 rounded-[2.5rem] overflow-hidden shadow-2xl shadow-green-900/10 border-4 border-white h-[600px]">
+                            <video
+                                autoPlay
+                                loop
+                                muted
+                                playsInline
+                                className="absolute inset-0 w-full h-full object-cover"
+                            >
+                                <source src="/assets/greenfield.MP4" type="video/mp4" />
+                                Your browser does not support the video tag.
+                            </video>
+
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none"></div>
+
+                            <div className="absolute bottom-8 left-8 right-8 text-white p-6 glass-card rounded-2xl border-0 bg-white/10 backdrop-blur-md z-20">
+                                <div className="flex items-center gap-4 mb-2">
+                                    <div className="p-2 bg-[var(--color-accent)] rounded-full">
+                                        <ShieldCheck className="w-6 h-6 text-white" />
+                                    </div>
+                                    <div>
+                                        <p className="font-bold text-lg">Certified Quality</p>
+                                        <p className="text-sm text-gray-200">International Standards</p>
                                     </div>
                                 </div>
                             </div>

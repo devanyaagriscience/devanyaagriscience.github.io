@@ -1,5 +1,9 @@
 Separate the mock data from single file to purpose specific files under data folder and update its usage accordingly.
 
+
+Update the Our Leadership Team: Mr. Brijesh Maurya, Founder and CEO. (For now use no image just icon)
+
+
 Get product types and their images from public/assets/images/products and read the images and populate the products page. Add some good descriptions about the product as dummy.
 
 Use the images from assets folder for products and update the paths accordingly.
@@ -13,8 +17,5 @@ Each product photo has both sides front and back, make sure to show both sides i
 
 Also enable mailing service to send the contact us form data to our email.
 
-Update the Our Leadership Team: Mr. Brijesh Maurya, Founder and CEO. (For now use no image just icon)
 
-
-On the homepage, "Certified Quality" section has no media, generate some good media for it preferably video. 
 

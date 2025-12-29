@@ -51,32 +51,49 @@ const GoogleTranslate = () => {
         window.location.reload();
     };
 
+    const [isOpen, setIsOpen] = useState(false);
+
+    const toggleDropdown = () => setIsOpen(!isOpen);
+
+    const selectLanguage = (lang) => {
+        handleLanguageChange(lang);
+        setIsOpen(false);
+    };
+
     return (
-        <div className="flex items-center gap-2">
+        <div className="relative">
             {/* Hidden container for the original widget */}
             <div id="google_translate_element" className="absolute opacity-0 w-0 h-0 overflow-hidden pointer-events-none" />
 
-            {/* Custom Toggle UI */}
-            <div className="flex items-center bg-white/50 backdrop-blur-sm border border-gray-200 rounded-full p-1 shadow-sm">
-                <button
-                    onClick={() => handleLanguageChange('en')}
-                    className={`px-3 py-1 rounded-full text-sm font-semibold transition-all duration-300 ${currentLang === 'en'
-                        ? 'bg-[var(--color-primary)] text-white shadow-md'
-                        : 'text-gray-500 hover:text-[var(--color-primary)]'
-                        }`}
-                >
-                    EN
-                </button>
-                <button
-                    onClick={() => handleLanguageChange('hi')}
-                    className={`px-3 py-1 rounded-full text-sm font-semibold transition-all duration-300 ${currentLang === 'hi'
-                        ? 'bg-[var(--color-primary)] text-white shadow-md'
-                        : 'text-gray-500 hover:text-[var(--color-primary)]'
-                        }`}
-                >
-                    HI
-                </button>
-            </div>
+            {/* Dropdown Trigger */}
+            <button
+                onClick={toggleDropdown}
+                className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/50 backdrop-blur-sm border border-gray-200 hover:bg-white hover:shadow-sm transition-all text-sm font-medium text-gray-700"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-globe"><circle cx="12" cy="12" r="10" /><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" /><path d="M2 12h20" /></svg>
+                <span>{currentLang === 'en' ? 'English' : 'हिंदी'}</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`lucide lucide-chevron-down transition-transform ${isOpen ? 'rotate-180' : ''}`}><path d="m6 9 6 6 6-6" /></svg>
+            </button>
+
+            {/* Dropdown Menu */}
+            {isOpen && (
+                <div className="absolute right-0 mt-2 w-32 bg-white rounded-xl shadow-lg border border-gray-100 py-1 z-50 animate-in fade-in slide-in-from-top-2">
+                    <button
+                        onClick={() => selectLanguage('en')}
+                        className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-50 flex items-center justify-between ${currentLang === 'en' ? 'text-[var(--color-primary)] font-bold' : 'text-gray-600'}`}
+                    >
+                        English
+                        {currentLang === 'en' && <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-check"><path d="M20 6 9 17l-5-5" /></svg>}
+                    </button>
+                    <button
+                        onClick={() => selectLanguage('hi')}
+                        className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-50 flex items-center justify-between ${currentLang === 'hi' ? 'text-[var(--color-primary)] font-bold' : 'text-gray-600'}`}
+                    >
+                        हिंदी
+                        {currentLang === 'hi' && <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-check"><path d="M20 6 9 17l-5-5" /></svg>}
+                    </button>
+                </div>
+            )}
         </div>
     );
 };

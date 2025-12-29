@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Hero from '../components/Hero';
-import { ArrowRight, CheckCircle, Microscope, Sprout, Signal, Quote, Beaker, Droplets, Users, Trees, Activity, Star } from 'lucide-react';
+import { ArrowRight, CheckCircle, Microscope, Sprout, Signal, Quote, Beaker, Droplets, Users, Trees, Activity, Star, MapPin, Store, ChevronLeft, ChevronRight } from 'lucide-react';
 import { products } from '../data/products';
 import { services } from '../data/services';
 import { testimonials } from '../data/testimonials';
@@ -84,6 +84,24 @@ const Home = () => {
                 </div>
             </section>
 
+            {/* Featured Products Carousel */}
+            <section className="section bg-gray-50 overflow-hidden">
+                <div className="container mx-auto px-4">
+                    <div className="text-center mb-16">
+                        <span className="text-[var(--color-primary)] font-bold tracking-wider uppercase text-sm">Our Best</span>
+                        <h2 className="text-3xl md:text-5xl font-bold mt-4">Featured Products</h2>
+                    </div>
+
+                    <div className="relative">
+                        <Carousel products={products.slice(0, 6)} />
+                    </div>
+
+                    <div className="text-center mt-12">
+                        <Link to="/products" className="btn btn-primary px-8 py-3">View All Products</Link>
+                    </div>
+                </div>
+            </section>
+
             {/* Sustainability Stats */}
             <section className="section bg-white">
                 <div className="container mx-auto px-4">
@@ -94,10 +112,10 @@ const Home = () => {
 
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                         {[
-                            { label: 'Water Saved', value: sustainabilityData.waterSaved, icon: Droplets, color: 'text-blue-500' },
-                            { label: 'Farmers Impacted', value: sustainabilityData.farmersImpacted, icon: Users, color: 'text-green-500' },
-                            { label: 'CO2 Reduction', value: sustainabilityData.carbonReduction, icon: Activity, color: 'text-emerald-500' },
-                            { label: 'Trees Planted', value: sustainabilityData.treesPlanted, icon: Trees, color: 'text-orange-500' },
+                            { label: 'Villages Covered', value: sustainabilityData.villagesCovered, icon: MapPin, color: 'text-blue-500' },
+                            { label: 'Farmers Connected', value: sustainabilityData.farmersConnected, icon: Users, color: 'text-green-500' },
+                            { label: 'Retail Partners', value: sustainabilityData.retailPartners, icon: Store, color: 'text-emerald-500' },
+                            { label: 'Varieties Launched', value: sustainabilityData.varietiesLaunched, icon: Sprout, color: 'text-orange-500' },
                         ].map((stat, index) => (
                             <motion.div
                                 key={index}
@@ -179,4 +197,85 @@ const Home = () => {
         </>
     );
 };
+const Carousel = ({ products }) => {
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [visibleItems, setVisibleItems] = useState(1);
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth >= 1024) setVisibleItems(3);
+            else if (window.innerWidth >= 768) setVisibleItems(2);
+            else setVisibleItems(1);
+        };
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    const nextSlide = () => {
+        setCurrentIndex((prev) => (prev + 1) % (products.length - visibleItems + 1));
+    };
+
+    const prevSlide = () => {
+        setCurrentIndex((prev) => (prev === 0 ? 0 : prev - 1));
+    };
+
+    const isEnd = currentIndex >= products.length - visibleItems;
+    const isStart = currentIndex === 0;
+
+    return (
+        <div className="relative group">
+            <div className="overflow-hidden">
+                <motion.div
+                    className="flex gap-6"
+                    initial={false}
+                    animate={{ x: `-${currentIndex * (100 / visibleItems)}%` }}
+                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                >
+                    {products.map((product) => (
+                        <div
+                            key={product.id}
+                            style={{ minWidth: `calc(${100 / visibleItems}% - 16px)` }}
+                            className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all"
+                        >
+                            <div className="h-48 overflow-hidden bg-gray-100 relative">
+                                <img src={product.images[0]} alt={product.name} className="w-full h-full object-cover" />
+                                <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-[var(--color-primary)]">
+                                    {product.category}
+                                </div>
+                            </div>
+                            <div className="p-6">
+                                <h3 className="text-xl font-bold text-gray-800 mb-2">{product.name}</h3>
+                                <p className="text-gray-500 text-sm mb-4 line-clamp-2">{product.description}</p>
+                                <Link to="/products" className="flex items-center gap-2 text-[var(--color-primary)] font-bold text-sm hover:gap-3 transition-all">
+                                    View Details <ArrowRight className="w-4 h-4" />
+                                </Link>
+                            </div>
+                        </div>
+                    ))}
+                </motion.div>
+            </div>
+
+            {/* Navigation Buttons */}
+            {!isStart && (
+                <button
+                    onClick={prevSlide}
+                    className="absolute left-0 top-1/2 -translate-y-1/2 -ml-4 md:-ml-6 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-800 hover:text-[var(--color-primary)] hover:scale-110 transition-all z-10"
+                >
+                    <ChevronLeft className="w-6 h-6" />
+                </button>
+            )}
+
+            {!isEnd && (
+                <button
+                    onClick={nextSlide}
+                    className="absolute right-0 top-1/2 -translate-y-1/2 -mr-4 md:-mr-6 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-800 hover:text-[var(--color-primary)] hover:scale-110 transition-all z-10"
+                >
+                    <ChevronRight className="w-6 h-6" />
+                </button>
+            )}
+        </div>
+    );
+};
+
 export default Home;

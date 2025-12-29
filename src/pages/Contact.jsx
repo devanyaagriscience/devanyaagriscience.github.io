@@ -7,7 +7,7 @@ const Contact = () => {
     const [formStatus, setFormStatus] = useState('idle'); // idle, submitting, success, error
     const [errorMessage, setErrorMessage] = useState('');
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setFormStatus('idle');
         setErrorMessage('');
@@ -39,13 +39,55 @@ const Contact = () => {
 
         setFormStatus('submitting');
 
-        // Simulating API call for now
-        setTimeout(() => {
-            setFormStatus('success');
-            // Reset after 3 seconds
-            setTimeout(() => setFormStatus('idle'), 3000);
-            e.target.reset();
-        }, 1500);
+        // Web3Forms API integration
+        const accessKey = import.meta.env.VITE_DAS_WEB3FORMS_ACCESS_KEY;
+
+        if (!accessKey || accessKey === 'your-access-key-here') {
+            setFormStatus('error');
+            setErrorMessage('Form service not configured. Please contact the administrator.');
+            return;
+        }
+
+        // Prepare form data for Web3Forms
+        const firstName = formData.get('firstName');
+        const lastName = formData.get('lastName');
+        const message = formData.get('message');
+
+        const web3FormData = {
+            access_key: accessKey,
+            name: `${firstName} ${lastName}`,
+            email: email || 'Not provided',
+            phone: phone || 'Not provided',
+            message: message,
+            subject: `New Contact Form Submission from ${firstName} ${lastName}`,
+            from_name: 'Devanya Agri Science Website',
+        };
+
+        try {
+            const response = await fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
+                body: JSON.stringify(web3FormData),
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                setFormStatus('success');
+                e.target.reset();
+                // Reset status after 5 seconds
+                setTimeout(() => setFormStatus('idle'), 5000);
+            } else {
+                setFormStatus('error');
+                setErrorMessage(result.message || 'Failed to send message. Please try again.');
+            }
+        } catch (error) {
+            setFormStatus('error');
+            setErrorMessage('Network error. Please check your connection and try again.');
+        }
     };
 
     return (

@@ -207,91 +207,91 @@ const Media = () => {
                         </div>
                     </div>
                 </div>
+            </div>
 
-                {/* Media Modal */}
-                <AnimatePresence>
-                    {selectedMedia && (
+            {/* Media Modal - Moved outside relative z-20 container & increased z-index */}
+            <AnimatePresence>
+                {selectedMedia && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        onClick={() => setSelectedMedia(null)}
+                        className="fixed inset-0 z-[60] bg-black/90 flex items-center justify-center p-4 backdrop-blur-md"
+                    >
                         <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            onClick={() => setSelectedMedia(null)}
-                            className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4 backdrop-blur-md"
+                            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                            onClick={(e) => e.stopPropagation()}
+                            className="bg-white rounded-3xl overflow-hidden max-w-4xl w-full max-h-[90vh] flex flex-col shadow-2xl relative"
                         >
-                            <motion.div
-                                initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                                animate={{ opacity: 1, scale: 1, y: 0 }}
-                                exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                                onClick={(e) => e.stopPropagation()}
-                                className="bg-white rounded-3xl overflow-hidden max-w-4xl w-full max-h-[90vh] flex flex-col shadow-2xl relative"
+                            <button
+                                onClick={() => setSelectedMedia(null)}
+                                className="absolute top-4 right-4 z-10 p-2 bg-black/50 text-white rounded-full hover:bg-black/70 transition-colors"
                             >
-                                <button
-                                    onClick={() => setSelectedMedia(null)}
-                                    className="absolute top-4 right-4 z-10 p-2 bg-black/50 text-white rounded-full hover:bg-black/70 transition-colors"
-                                >
-                                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                                    </svg>
-                                </button>
+                                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
 
-                                <div className="flex-1 overflow-auto">
-                                    {selectedMedia.type === 'video' ? (
-                                        <div className="aspect-video bg-black flex items-center justify-center">
-                                            <video
-                                                controls
-                                                autoPlay
-                                                className="w-full h-full"
-                                                src={selectedMedia.videoUrl}
-                                                poster={selectedMedia.thumbnail}
-                                            >
-                                                Your browser does not support the video tag.
-                                            </video>
-                                        </div>
-                                    ) : (
-                                        <div className="aspect-video bg-gray-100 flex items-center justify-center overflow-hidden">
-                                            <img
-                                                src={selectedMedia.url || selectedMedia.image}
-                                                alt={selectedMedia.caption || selectedMedia.title}
-                                                className="w-full h-full object-contain"
-                                            />
-                                        </div>
-                                    )}
+                            <div className="flex-1 overflow-auto">
+                                {selectedMedia.type === 'video' ? (
+                                    <div className="aspect-video bg-black flex items-center justify-center">
+                                        <video
+                                            controls
+                                            autoPlay
+                                            className="w-full h-full"
+                                            src={selectedMedia.videoUrl}
+                                            poster={selectedMedia.thumbnail}
+                                        >
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    </div>
+                                ) : (
+                                    <div className="aspect-video bg-gray-100 flex items-center justify-center overflow-hidden">
+                                        <img
+                                            src={selectedMedia.url || selectedMedia.image}
+                                            alt={selectedMedia.caption || selectedMedia.title}
+                                            className="w-full h-full object-contain"
+                                        />
+                                    </div>
+                                )}
 
-                                    <div className="p-8">
-                                        <div className="flex flex-wrap items-center gap-4 mb-4 text-sm text-[var(--color-primary)] font-bold uppercase tracking-wider">
-                                            {(selectedMedia.type === 'photo' || selectedMedia.type === 'event') && (
-                                                <>
-                                                    <span className="flex items-center gap-1"><MapPin className="w-4 h-4" /> {selectedMedia.location}</span>
-                                                    <span className="flex items-center gap-1"><Calendar className="w-4 h-4" /> {selectedMedia.date}</span>
-                                                </>
-                                            )}
-                                            {selectedMedia.type === 'video' && (
-                                                <>
-                                                    <span>Duration: {selectedMedia.duration}</span>
-                                                </>
-                                            )}
-                                        </div>
-                                        <h3 className="text-2xl font-bold text-gray-800 mb-4">
-                                            {selectedMedia.type === 'photo' ? selectedMedia.caption : selectedMedia.title}
-                                        </h3>
-                                        <p className="text-gray-600 text-lg leading-relaxed mb-6">
-                                            {selectedMedia.description || "No description available."}
-                                        </p>
-
-                                        {loadingArticle ? (
-                                            <div className="flex justify-center py-4"><Loader2 className="animate-spin" /></div>
-                                        ) : articleContent && (
-                                            <div className="prose prose-green max-w-none mt-8 pt-8 border-t border-gray-100">
-                                                <ReactMarkdown remarkPlugins={[remarkGfm]}>{articleContent}</ReactMarkdown>
-                                            </div>
+                                <div className="p-8">
+                                    <div className="flex flex-wrap items-center gap-4 mb-4 text-sm text-[var(--color-primary)] font-bold uppercase tracking-wider">
+                                        {(selectedMedia.type === 'photo' || selectedMedia.type === 'event') && (
+                                            <>
+                                                <span className="flex items-center gap-1"><MapPin className="w-4 h-4" /> {selectedMedia.location}</span>
+                                                <span className="flex items-center gap-1"><Calendar className="w-4 h-4" /> {selectedMedia.date}</span>
+                                            </>
+                                        )}
+                                        {selectedMedia.type === 'video' && (
+                                            <>
+                                                <span>Duration: {selectedMedia.duration}</span>
+                                            </>
                                         )}
                                     </div>
+                                    <h3 className="text-2xl font-bold text-gray-800 mb-4">
+                                        {selectedMedia.type === 'photo' ? selectedMedia.caption : selectedMedia.title}
+                                    </h3>
+                                    <p className="text-gray-600 text-lg leading-relaxed mb-6">
+                                        {selectedMedia.description || "No description available."}
+                                    </p>
+
+                                    {loadingArticle ? (
+                                        <div className="flex justify-center py-4"><Loader2 className="animate-spin" /></div>
+                                    ) : articleContent && (
+                                        <div className="prose prose-green max-w-none mt-8 pt-8 border-t border-gray-100">
+                                            <ReactMarkdown remarkPlugins={[remarkGfm]}>{articleContent}</ReactMarkdown>
+                                        </div>
+                                    )}
                                 </div>
-                            </motion.div>
+                            </div>
                         </motion.div>
-                    )}
-                </AnimatePresence>
-            </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
     );
 };

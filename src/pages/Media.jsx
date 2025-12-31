@@ -134,7 +134,7 @@ const Media = () => {
 
                 {/* Events Timeline Section */}
                 <div className="mt-32">
-                    <div className="text-center mb-20">
+                    <div className="text-center mb-10">
                         <span className="text-[var(--color-primary)] font-bold tracking-wider uppercase text-sm">Our Presence</span>
                         <h2 className="text-3xl md:text-5xl font-bold mt-4">Events & Engagements Timeline</h2>
                         <p className="text-gray-500 mt-6 text-lg max-w-2xl mx-auto">Track our journey through field days, seminars, and community meets across the country.</p>
@@ -144,7 +144,7 @@ const Media = () => {
                         {/* Vertical line mapping through events */}
                         <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-green-100 hidden md:block"></div>
 
-                        <div className="space-y-16 md:space-y-32">
+                        <div className="space-y-8 md:space-y-6">
                             {events.map((event, index) => (
                                 <motion.div
                                     key={event.id}
@@ -155,7 +155,10 @@ const Media = () => {
                                 >
                                     {/* Content Card */}
                                     <div className="w-full md:w-5/12">
-                                        <div className="bg-gray-50 p-8 rounded-[2.5rem] shadow-sm hover:shadow-xl transition-all border border-gray-100 group">
+                                        <div
+                                            onClick={() => setSelectedMedia({ type: 'event', ...event })}
+                                            className="bg-gray-50 p-8 rounded-[2.5rem] shadow-sm hover:shadow-xl transition-all border border-gray-100 group cursor-pointer"
+                                        >
                                             <div className="h-48 rounded-2xl overflow-hidden mb-6">
                                                 <img src={event.image} alt={event.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                                             </div>
@@ -225,8 +228,8 @@ const Media = () => {
                                     ) : (
                                         <div className="aspect-video bg-gray-100 flex items-center justify-center overflow-hidden">
                                             <img
-                                                src={selectedMedia.url}
-                                                alt={selectedMedia.caption}
+                                                src={selectedMedia.url || selectedMedia.image}
+                                                alt={selectedMedia.caption || selectedMedia.title}
                                                 className="w-full h-full object-contain"
                                             />
                                         </div>
@@ -234,7 +237,7 @@ const Media = () => {
 
                                     <div className="p-8">
                                         <div className="flex flex-wrap items-center gap-4 mb-4 text-sm text-[var(--color-primary)] font-bold uppercase tracking-wider">
-                                            {selectedMedia.type === 'photo' && (
+                                            {(selectedMedia.type === 'photo' || selectedMedia.type === 'event') && (
                                                 <>
                                                     <span className="flex items-center gap-1"><MapPin className="w-4 h-4" /> {selectedMedia.location}</span>
                                                     <span className="flex items-center gap-1"><Calendar className="w-4 h-4" /> {selectedMedia.date}</span>

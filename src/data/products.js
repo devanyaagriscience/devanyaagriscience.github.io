@@ -10,6 +10,7 @@ export const products = [
         features: ["High Yield Potential", "Stress Tolerant", "Uniform Grain Size"],
         brochureUrl: "#",
         article: "/assets/information/markdown/products/paddy-das-300.md",
+        video: "/assets/videos/products/placeholder_3d.mp4",
         keywords: ["Rice", "Chawal", "Dhaan", "Yield", "Pest Resistant", "Research Variety"]
     },
     {
@@ -22,6 +23,7 @@ export const products = [
         features: ["Non-Lodging", "Good Mill Quality", "Early Maturity"],
         brochureUrl: "#",
         article: "/assets/information/markdown/products/paddy-das-6060.md",
+        video: "/assets/videos/products/placeholder_3d.mp4",
         keywords: ["Rice", "Chawal", "Dhaan", "Short Duration", "Non-Lodging", "Strong Stem", "Early", "Maturity"]
     },
     {
@@ -34,6 +36,7 @@ export const products = [
         features: ["Premium Grain", "Market Preferred", "High Tillering"],
         brochureUrl: "#",
         article: "/assets/information/markdown/products/paddy-das-8028.md",
+        video: "/assets/videos/products/placeholder_3d.mp4",
         keywords: ["Rice", "Chawal", "Dhaan", "Premium", "Slender", "Tasty", "Cooking", "Fine Grain"]
     },
     {
@@ -46,6 +49,7 @@ export const products = [
         features: ["Disease Resistance", "Heavy Panicles", "High Test Weight"],
         brochureUrl: "#",
         article: "/assets/information/markdown/products/paddy-das-8040.md",
+        video: "/assets/videos/products/placeholder_3d.mp4",
         keywords: ["Rice", "Chawal", "Dhaan", "Disease Resistant", "Heavy", "High Output", "Irrigated"]
     },
     {
@@ -58,6 +62,7 @@ export const products = [
         features: ["Adaptable", "Bumper Yield", "Excellent Cooking"],
         brochureUrl: "#",
         article: "/assets/information/markdown/products/paddy-das-8888.md",
+        video: "/assets/videos/products/placeholder_3d.mp4",
         keywords: ["Rice", "Chawal", "Dhaan", "Bumper Yield", "Versatile", "Cooking", "Household"]
     },
     {
@@ -74,6 +79,7 @@ export const products = [
         features: ["Exotic Aroma", "Iron Rich", "Gourmet Quality"],
         brochureUrl: "#",
         article: "/assets/information/markdown/products/paddy-kala-namak.md",
+        video: "/assets/videos/products/placeholder_3d.mp4",
         keywords: ["Rice", "Chawal", "Dhaan", "Aromatic", "Scented", "Buddha Rice", "Iron", "Nutrition", "Black Rice", "Basmati alternative"]
     },
     // Onion
@@ -87,6 +93,7 @@ export const products = [
         features: ["Long Storage", "Dark Red Color", "Export Quality"],
         brochureUrl: "#",
         article: "/assets/information/markdown/products/onion-fursungi.md",
+        video: "/assets/videos/products/placeholder_3d.mp4",
         keywords: ["Pyaz", "Kanda", "Red Onion", "Storage", "Export", "Long keeping"]
     },
     {
@@ -99,6 +106,7 @@ export const products = [
         features: ["High Pungency", "Drought Hardy", "Traditional Flavor"],
         brochureUrl: "#",
         article: "/assets/information/markdown/products/onion-gavran.md",
+        video: "/assets/videos/products/placeholder_3d.mp4",
         keywords: ["Pyaz", "Kanda", "Desi", "Pungent", "Spicy", "Drought Tolerant", "Local"]
     },
     {
@@ -111,6 +119,7 @@ export const products = [
         features: ["Kharif Special", "Early Harvest", "Bright Red"],
         brochureUrl: "#",
         article: "/assets/information/markdown/products/onion-n-53.md",
+        video: "/assets/videos/products/placeholder_3d.mp4",
         keywords: ["Pyaz", "Kanda", "Kharif", "Early", "Red", "Monsoon"]
     },
     // Urad (Pulses)
@@ -124,6 +133,7 @@ export const products = [
         features: ["YMV Resistant", "Bold Seeds", "High Protein"],
         brochureUrl: "#",
         article: "/assets/information/markdown/products/urad-pu-31.md",
+        video: "/assets/videos/products/placeholder_3d.mp4",
         keywords: ["Dal", "Pulse", "Black Gram", "Urad Bean", "Protein", "Resistant", "YMV"]
     },
     {
@@ -136,6 +146,7 @@ export const products = [
         features: ["Synchronized Maturity", "Disease Tolerant", "Easy Harvest"],
         brochureUrl: "#",
         article: "/assets/information/markdown/products/urad-shekher-2.md",
+        video: "/assets/videos/products/placeholder_3d.mp4",
         keywords: ["Dal", "Pulse", "Black Gram", "Harvest", "Easy", "Disease Tolerant", "Synchronized"]
     },
     // Mustard
@@ -149,6 +160,7 @@ export const products = [
         features: ["High Oil %", "Bold Seeds", "Frost Tolerant"],
         brochureUrl: "#",
         article: "/assets/information/markdown/products/mustard-das-4747.md",
+        video: "/assets/videos/products/placeholder_3d.mp4",
         keywords: ["Sarso", "Oilseed", "Oil", "Rai", "Frost Tolerant", "Bold"]
     },
     // Pea
@@ -162,6 +174,7 @@ export const products = [
         features: ["Sweet & Tender", "Long Pods", "Market Favorite"],
         brochureUrl: "#",
         article: "/assets/information/markdown/products/pea-sweet-green.md",
+        video: "/assets/videos/products/placeholder_3d.mp4",
         keywords: ["Matar", "Green Pea", "Vegetable", "Sweet", "Garden Pea"]
     },
     // Sudan
@@ -175,6 +188,7 @@ export const products = [
         features: ["Multi-Cut", "High Protein Fodder", "Fast Growth"],
         brochureUrl: "#",
         article: "/assets/information/markdown/products/sudan-white.md",
+        video: "/assets/videos/products/placeholder_3d.mp4",
         keywords: ["Fodder", "Grass", "Cattle Feed", "Dairy", "Milk", "Chara", "Fast Growth"]
     }
 ];

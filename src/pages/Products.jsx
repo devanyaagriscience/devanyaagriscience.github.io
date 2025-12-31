@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Fuse from 'fuse.js';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import VideoModal from '../components/VideoModal';
 
 const Products = () => {
     const [searchParams] = useSearchParams();
@@ -17,13 +18,26 @@ const Products = () => {
     const [articleContent, setArticleContent] = useState('');
     const [loadingArticle, setLoadingArticle] = useState(false);
     const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+    const [selectedVideo, setSelectedVideo] = useState(null);
+
+    const getMediaItems = (product) => {
+        if (!product) return [];
+        const items = [...(product.images || [product.image])];
+        if (product.video) {
+            items.push({ type: 'video', src: product.video });
+        }
+        return items;
+    };
 
     useEffect(() => {
         let interval;
-        if (selectedProduct && selectedProduct.images && selectedProduct.images.length > 1 && isAutoPlaying) {
-            interval = setInterval(() => {
-                setCurrentImageIndex((prev) => (prev + 1) % selectedProduct.images.length);
-            }, 3000);
+        if (selectedProduct && isAutoPlaying) {
+            const mediaItems = getMediaItems(selectedProduct);
+            if (mediaItems.length > 1) {
+                interval = setInterval(() => {
+                    setCurrentImageIndex((prev) => (prev + 1) % mediaItems.length);
+                }, 3000);
+            }
         }
         return () => clearInterval(interval);
     }, [selectedProduct, isAutoPlaying]);
@@ -54,15 +68,21 @@ const Products = () => {
 
     const nextImage = (e) => {
         e.stopPropagation();
-        if (selectedProduct && selectedProduct.images.length > 1) {
-            setCurrentImageIndex((prev) => (prev + 1) % selectedProduct.images.length);
+        if (selectedProduct) {
+            const mediaItems = getMediaItems(selectedProduct);
+            if (mediaItems.length > 1) {
+                setCurrentImageIndex((prev) => (prev + 1) % mediaItems.length);
+            }
         }
     };
 
     const prevImage = (e) => {
         e.stopPropagation();
-        if (selectedProduct && selectedProduct.images.length > 1) {
-            setCurrentImageIndex((prev) => (prev - 1 + selectedProduct.images.length) % selectedProduct.images.length);
+        if (selectedProduct) {
+            const mediaItems = getMediaItems(selectedProduct);
+            if (mediaItems.length > 1) {
+                setCurrentImageIndex((prev) => (prev - 1 + mediaItems.length) % mediaItems.length);
+            }
         }
     };
 
@@ -180,10 +200,21 @@ const Products = () => {
                                         <ShoppingBag className="w-16 h-16 text-gray-300 opacity-30" />
                                     </div>
 
-                                    <div className="absolute top-6 left-6 z-10">
+                                    <div className="absolute top-6 left-6 z-10 flex flex-col gap-2 items-start">
                                         <span className="bg-white/90 backdrop-blur-md px-4 py-1.5 rounded-full text-[10px] uppercase tracking-widest font-black text-[var(--color-primary)] shadow-sm">
                                             {product.category}
                                         </span>
+                                        {product.video && (
+                                            <button
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    setSelectedVideo(product.video);
+                                                }}
+                                                className="bg-blue-600/90 hover:bg-blue-700 text-white backdrop-blur-md px-3 py-1.5 rounded-full text-[10px] uppercase tracking-widest font-bold shadow-sm flex items-center gap-1 transition-all hover:scale-105 z-20 cursor-pointer"
+                                            >
+                                                <div className="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></div> 3D View
+                                            </button>
+                                        )}
                                     </div>
 
                                     {/* Quick View Button */}
@@ -282,39 +313,60 @@ const Products = () => {
                                 onMouseLeave={() => setIsAutoPlaying(true)}
                             >
                                 <AnimatePresence mode="wait">
-                                    <motion.img
-                                        key={currentImageIndex}
-                                        src={selectedProduct.images && selectedProduct.images.length > 0 ? selectedProduct.images[currentImageIndex] : selectedProduct.image}
-                                        alt={selectedProduct.name}
-                                        initial={{ opacity: 0 }}
-                                        animate={{ opacity: 1 }}
-                                        exit={{ opacity: 0 }}
-                                        transition={{ duration: 0.5 }}
-                                        className="w-full h-full object-contain p-4"
-                                        onError={(e) => {
-                                            e.target.style.display = 'none';
-                                            e.target.nextSibling.style.display = 'flex';
-                                        }}
-                                    />
+                                    {getMediaItems(selectedProduct)[currentImageIndex]?.type === 'video' ? (
+                                        <motion.div
+                                            key={`video-${currentImageIndex}`}
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: 1 }}
+                                            exit={{ opacity: 0 }}
+                                            transition={{ duration: 0.5 }}
+                                            className="w-full h-full flex items-center justify-center bg-black"
+                                        >
+                                            <video
+                                                src={getMediaItems(selectedProduct)[currentImageIndex].src}
+                                                controls
+                                                autoPlay
+                                                loop
+                                                muted
+                                                className="w-full h-full object-contain"
+                                            />
+                                        </motion.div>
+                                    ) : (
+                                        <motion.img
+                                            key={currentImageIndex}
+                                            src={getMediaItems(selectedProduct)[currentImageIndex]}
+                                            alt={selectedProduct.name}
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: 1 }}
+                                            exit={{ opacity: 0 }}
+                                            transition={{ duration: 0.5 }}
+                                            className="w-full h-full object-contain p-4"
+                                            onError={(e) => {
+                                                e.target.style.display = 'none';
+                                                e.target.nextSibling.style.display = 'flex';
+                                            }}
+                                        />
+                                    )}
                                 </AnimatePresence>
                                 <div className="absolute inset-0 bg-gray-50 flex items-center justify-center hidden">
                                     <ShoppingBag className="w-48 h-48 text-gray-200" />
                                 </div>
                                 <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 w-full flex justify-center gap-2">
-                                    {selectedProduct.images && selectedProduct.images.length > 1 && (
+                                    {getMediaItems(selectedProduct).length > 1 && (
                                         <div className="flex gap-2 bg-black/20 backdrop-blur-sm p-1 rounded-full">
-                                            {selectedProduct.images.map((_, idx) => (
+                                            {getMediaItems(selectedProduct).map((item, idx) => (
                                                 <button
                                                     key={idx}
                                                     onClick={(e) => { e.stopPropagation(); setCurrentImageIndex(idx); }}
                                                     className={`w-2 h-2 rounded-full transition-all ${currentImageIndex === idx ? 'bg-white w-4' : 'bg-white/50 hover:bg-white/80'}`}
+                                                    title={item.type === 'video' ? 'Video' : `Image ${idx + 1}`}
                                                 />
                                             ))}
                                         </div>
                                     )}
                                 </div>
 
-                                {selectedProduct.images && selectedProduct.images.length > 1 && (
+                                {getMediaItems(selectedProduct).length > 1 && (
                                     <>
                                         <button
                                             onClick={prevImage}
@@ -331,10 +383,21 @@ const Products = () => {
                                     </>
                                 )}
 
-                                <div className="absolute top-6 left-6 z-10">
-                                    <span className="bg-white/90 backdrop-blur-md px-6 py-2 rounded-full shadow-lg text-sm font-black text-[var(--color-primary)] uppercase tracking-widest">
+                                <div className="absolute top-6 left-6 z-10 space-y-2">
+                                    <span className="bg-white/90 backdrop-blur-md px-6 py-2 rounded-full shadow-lg text-sm font-black text-[var(--color-primary)] uppercase tracking-widest block w-fit">
                                         Verified Quality
                                     </span>
+                                    {getMediaItems(selectedProduct)[currentImageIndex]?.type === 'video' && (
+                                        <button
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                setSelectedVideo(getMediaItems(selectedProduct)[currentImageIndex].src);
+                                            }}
+                                            className="bg-blue-600/90 hover:bg-blue-700 text-white backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold shadow-lg uppercase tracking-widest block w-fit transition-all cursor-pointer"
+                                        >
+                                            3D View
+                                        </button>
+                                    )}
                                 </div>
                             </div>
 
@@ -387,6 +450,12 @@ const Products = () => {
                     </div>
                 )}
             </AnimatePresence>
+
+            <VideoModal
+                isOpen={!!selectedVideo}
+                onClose={() => setSelectedVideo(null)}
+                videoSrc={selectedVideo}
+            />
         </div>
     );
 };

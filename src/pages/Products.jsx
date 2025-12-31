@@ -1,10 +1,10 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
-import { Search, Filter, ChevronDown, Download, Leaf, Droplets, Sun, Info, X, ShoppingBag, ArrowRight, Star, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Search, Filter, ChevronDown, Download, Leaf, Droplets, Sun, Info, X, ShoppingBag, ArrowRight, Star, ChevronLeft, ChevronRight, Loader2 } from 'lucide-react';
 import { products } from '../data/products';
 import { motion, AnimatePresence } from 'framer-motion';
-
-import ArticleModal from '../components/ArticleModal';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 const Products = () => {
     const [searchParams] = useSearchParams();
@@ -12,12 +12,43 @@ const Products = () => {
     const [activeCategory, setActiveCategory] = useState(categoryParam || 'All');
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedProduct, setSelectedProduct] = useState(null);
-    const [articleProduct, setArticleProduct] = useState(null);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const [articleContent, setArticleContent] = useState('');
+    const [loadingArticle, setLoadingArticle] = useState(false);
+    const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+
+    useEffect(() => {
+        let interval;
+        if (selectedProduct && selectedProduct.images && selectedProduct.images.length > 1 && isAutoPlaying) {
+            interval = setInterval(() => {
+                setCurrentImageIndex((prev) => (prev + 1) % selectedProduct.images.length);
+            }, 3000);
+        }
+        return () => clearInterval(interval);
+    }, [selectedProduct, isAutoPlaying]);
+
+    useEffect(() => {
+        if (selectedProduct?.article) {
+            setLoadingArticle(true);
+            fetch(selectedProduct.article)
+                .then(res => res.text())
+                .then(text => {
+                    setArticleContent(text);
+                    setLoadingArticle(false);
+                })
+                .catch(err => {
+                    console.error("Error fetching article", err);
+                    setLoadingArticle(false);
+                });
+        } else {
+            setArticleContent('');
+        }
+    }, [selectedProduct]);
 
     const openModal = (product) => {
         setSelectedProduct(product);
         setCurrentImageIndex(0);
+        setIsAutoPlaying(true);
     };
 
     const nextImage = (e) => {
@@ -231,17 +262,27 @@ const Products = () => {
                                 <X className="w-6 h-6 text-gray-800" />
                             </button>
 
-                            <div className="bg-gray-50 min-h-[400px] md:h-full relative flex items-center justify-center p-0 overflow-hidden group/image">
-                                <img
-                                    src={selectedProduct.images && selectedProduct.images.length > 0 ? selectedProduct.images[currentImageIndex] : selectedProduct.image}
-                                    alt={selectedProduct.name}
-                                    className="w-full h-full object-contain transition-opacity duration-300"
-                                    key={currentImageIndex}
-                                    onError={(e) => {
-                                        e.target.style.display = 'none';
-                                        e.target.nextSibling.style.display = 'flex';
-                                    }}
-                                />
+                            <div
+                                className="bg-gray-50 min-h-[400px] md:h-full relative flex items-center justify-center p-0 overflow-hidden group/image"
+                                onMouseEnter={() => setIsAutoPlaying(false)}
+                                onMouseLeave={() => setIsAutoPlaying(true)}
+                            >
+                                <AnimatePresence mode="wait">
+                                    <motion.img
+                                        key={currentImageIndex}
+                                        src={selectedProduct.images && selectedProduct.images.length > 0 ? selectedProduct.images[currentImageIndex] : selectedProduct.image}
+                                        alt={selectedProduct.name}
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        exit={{ opacity: 0 }}
+                                        transition={{ duration: 0.5 }}
+                                        className="w-full h-full object-contain p-4"
+                                        onError={(e) => {
+                                            e.target.style.display = 'none';
+                                            e.target.nextSibling.style.display = 'flex';
+                                        }}
+                                    />
+                                </AnimatePresence>
                                 <div className="absolute inset-0 bg-gray-50 flex items-center justify-center hidden">
                                     <ShoppingBag className="w-48 h-48 text-gray-200" />
                                 </div>
@@ -304,21 +345,25 @@ const Products = () => {
                                     </div>
                                 </div>
 
+                                {loadingArticle ? (
+                                    <div className="flex justify-center py-10">
+                                        <Loader2 className="animate-spin text-gray-400" size={32} />
+                                    </div>
+                                ) : articleContent && (
+                                    <div className="prose prose-sm md:prose-base dark:prose-invert max-w-none mt-8 pt-8 border-t border-gray-100">
+                                        <h4 className="font-bold text-gray-900 mb-4 uppercase tracking-widest text-xs">Detailed Information</h4>
+                                        <ReactMarkdown remarkPlugins={[remarkGfm]}>{articleContent}</ReactMarkdown>
+                                    </div>
+                                )}
+
                                 <div className="flex flex-col sm:flex-row gap-4 mt-8 pt-10 border-t border-gray-100">
-                                    {selectedProduct.article && (
-                                        <button
-                                            onClick={() => setArticleProduct(selectedProduct)}
-                                            className="btn btn-primary flex-1 shadow-2xl py-5 text-xl rounded-2xl"
-                                        >
-                                            Read Full Article
-                                        </button>
-                                    )}
-                                    <Link to="/contact" className={`btn ${selectedProduct.article ? 'bg-gray-100 text-gray-800' : 'btn-primary'} flex-1 shadow-xl py-5 text-xl rounded-2xl flex items-center justify-center`}>
+                                    <Link to="/contact" className="btn btn-primary flex-1 shadow-xl py-5 text-xl rounded-2xl flex items-center justify-center">
                                         Enquire Now
                                     </Link>
                                     <a
                                         href={selectedProduct.brochureUrl}
                                         className="btn bg-gray-50 text-gray-800 hover:bg-gray-100 flex items-center justify-center gap-3 px-8 rounded-2xl border border-gray-100 transition-all font-bold"
+                                        title="Download Brochure"
                                     >
                                         <Download className="w-5 h-5" /> Brochure
                                     </a>
@@ -328,13 +373,6 @@ const Products = () => {
                     </div>
                 )}
             </AnimatePresence>
-
-            <ArticleModal
-                isOpen={!!articleProduct}
-                onClose={() => setArticleProduct(null)}
-                articlePath={articleProduct?.article}
-                title={articleProduct?.name}
-            />
         </div>
     );
 };

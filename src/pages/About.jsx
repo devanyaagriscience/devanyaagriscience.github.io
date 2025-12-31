@@ -47,7 +47,7 @@ const About = () => {
                                 Devanya Agri Science was founded with a singular vision: to empower the farming community with high-quality, scientifically backed agricultural inputs.
                             </p>
                             <p className="text-gray-600 text-lg leading-relaxed mb-8">
-                                Starting as a small research unit, we have grown into a trusted partner for thousands of farmers, providing everything from seeds to advanced crop protection. We understand the challenges of modern agriculture.
+                                Driven by a commitment to innovation and sustainability, we have grown into a trusted partner for thousands of farmers. Our journey is focused on delivering advanced solutions that not only meet today's needs but also pave the way for a resilient and prosperous future for agriculture.
                             </p>
                             <div className="grid grid-cols-2 gap-6">
                                 <div className="p-4 bg-green-50 rounded-2xl">

@@ -11,6 +11,7 @@ export const products = [
         brochureUrl: "#",
         article: "/assets/information/markdown/products/paddy-das-300.md",
         video: "/assets/videos/products/placeholder_3d.mp4",
+        qrCode: "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=Paddy%20DAS%20300",
         keywords: ["Rice", "Chawal", "Dhaan", "Yield", "Pest Resistant", "Research Variety"]
     },
     {
@@ -24,6 +25,7 @@ export const products = [
         brochureUrl: "#",
         article: "/assets/information/markdown/products/paddy-das-6060.md",
         video: "/assets/videos/products/placeholder_3d.mp4",
+        qrCode: "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=Paddy%20DAS%206060",
         keywords: ["Rice", "Chawal", "Dhaan", "Short Duration", "Non-Lodging", "Strong Stem", "Early", "Maturity"]
     },
     {
@@ -94,6 +96,7 @@ export const products = [
         brochureUrl: "#",
         article: "/assets/information/markdown/products/onion-fursungi.md",
         video: "/assets/videos/products/placeholder_3d.mp4",
+        qrCode: "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=Onion%20Fursungi",
         keywords: ["Pyaz", "Kanda", "Red Onion", "Storage", "Export", "Long keeping"]
     },
     {
@@ -134,6 +137,7 @@ export const products = [
         brochureUrl: "#",
         article: "/assets/information/markdown/products/urad-pu-31.md",
         video: "/assets/videos/products/placeholder_3d.mp4",
+        qrCode: "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=Urad%20PU-31",
         keywords: ["Dal", "Pulse", "Black Gram", "Urad Bean", "Protein", "Resistant", "YMV"]
     },
     {
@@ -161,6 +165,7 @@ export const products = [
         brochureUrl: "#",
         article: "/assets/information/markdown/products/mustard-das-4747.md",
         video: "/assets/videos/products/placeholder_3d.mp4",
+        qrCode: "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=Mustard%20DAS%204747",
         keywords: ["Sarso", "Oilseed", "Oil", "Rai", "Frost Tolerant", "Bold"]
     },
     // Pea

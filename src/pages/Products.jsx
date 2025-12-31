@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
-import { Search, Filter, ChevronDown, Download, Leaf, Droplets, Sun, Info, X, ShoppingBag, ArrowRight, Star, ChevronLeft, ChevronRight, Loader2 } from 'lucide-react';
+import { Search, Filter, ChevronDown, Download, Leaf, Droplets, Sun, Info, X, ShoppingBag, ArrowRight, Star, ChevronLeft, ChevronRight, Loader2, QrCode } from 'lucide-react';
 import { products } from '../data/products';
 import { motion, AnimatePresence } from 'framer-motion';
 import Fuse from 'fuse.js';
@@ -19,6 +19,7 @@ const Products = () => {
     const [loadingArticle, setLoadingArticle] = useState(false);
     const [isAutoPlaying, setIsAutoPlaying] = useState(true);
     const [selectedVideo, setSelectedVideo] = useState(null);
+    const [selectedQR, setSelectedQR] = useState(null);
 
     const getMediaItems = (product) => {
         if (!product) return [];
@@ -204,15 +205,29 @@ const Products = () => {
                                         <span className="bg-white/90 backdrop-blur-md px-4 py-1.5 rounded-full text-[10px] uppercase tracking-widest font-black text-[var(--color-primary)] shadow-sm">
                                             {product.category}
                                         </span>
+                                    </div>
+
+                                    <div className="absolute top-6 right-6 flex gap-2 z-20">
                                         {product.video && (
                                             <button
                                                 onClick={(e) => {
                                                     e.stopPropagation();
                                                     setSelectedVideo(product.video);
                                                 }}
-                                                className="bg-[var(--color-primary)] hover:bg-green-800 text-white backdrop-blur-md px-3 py-1.5 rounded-full text-[10px] uppercase tracking-widest font-bold shadow-sm flex items-center gap-1 transition-all hover:scale-105 z-20 cursor-pointer"
+                                                className="bg-[var(--color-primary)] hover:bg-green-800 text-white backdrop-blur-md px-3 py-1.5 rounded-full text-[10px] uppercase tracking-widest font-bold shadow-sm flex items-center gap-1 transition-all hover:scale-105 cursor-pointer"
                                             >
                                                 <div className="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></div> 3D View
+                                            </button>
+                                        )}
+                                        {product.qrCode && (
+                                            <button
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    setSelectedQR({ src: product.qrCode, name: product.name });
+                                                }}
+                                                className="bg-white/90 hover:bg-white text-gray-800 backdrop-blur-md px-3 py-1.5 rounded-full text-[10px] uppercase tracking-widest font-bold shadow-sm flex items-center gap-1 transition-all hover:scale-105 cursor-pointer"
+                                            >
+                                                <QrCode size={12} /> QR Code
                                             </button>
                                         )}
                                     </div>
@@ -388,15 +403,28 @@ const Products = () => {
                                         Verified Quality
                                     </span>
                                     {getMediaItems(selectedProduct)[currentImageIndex]?.type === 'video' && (
-                                        <button
-                                            onClick={(e) => {
-                                                e.stopPropagation();
-                                                setSelectedVideo(getMediaItems(selectedProduct)[currentImageIndex].src);
-                                            }}
-                                            className="bg-[var(--color-primary)] hover:bg-green-800 text-white backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold shadow-lg uppercase tracking-widest block w-fit transition-all cursor-pointer"
-                                        >
-                                            3D View
-                                        </button>
+                                        <div className="flex gap-2">
+                                            <button
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    setSelectedVideo(getMediaItems(selectedProduct)[currentImageIndex].src);
+                                                }}
+                                                className="bg-[var(--color-primary)] hover:bg-green-800 text-white backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold shadow-lg uppercase tracking-widest block w-fit transition-all cursor-pointer"
+                                            >
+                                                3D View
+                                            </button>
+                                            {selectedProduct.qrCode && (
+                                                <button
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        setSelectedQR({ src: selectedProduct.qrCode, name: selectedProduct.name });
+                                                    }}
+                                                    className="bg-gray-100 hover:bg-gray-200 text-gray-900 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold shadow-lg uppercase tracking-widest flex items-center gap-2 w-fit transition-all cursor-pointer border border-gray-200"
+                                                >
+                                                    <QrCode size={16} /> QR Code
+                                                </button>
+                                            )}
+                                        </div>
                                     )}
                                 </div>
                             </div>
@@ -448,6 +476,52 @@ const Products = () => {
                             </div>
                         </motion.div>
                     </div>
+                )}
+            </AnimatePresence>
+
+            {/* QR Code Modal */}
+            <AnimatePresence>
+                {selectedQR && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm"
+                        onClick={() => setSelectedQR(null)}
+                    >
+                        <motion.div
+                            initial={{ scale: 0.9, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.9, opacity: 0 }}
+                            className="bg-white p-6 rounded-2xl max-w-sm w-full relative shadow-2xl"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <button
+                                onClick={() => setSelectedQR(null)}
+                                className="absolute top-4 right-4 bg-gray-100 p-2 rounded-full text-gray-600 hover:bg-gray-200 hover:text-gray-900 transition-colors"
+                            >
+                                <X size={20} />
+                            </button>
+
+                            <h3 className="text-lg font-bold text-gray-900 mb-4 text-center">Scan QR Code</h3>
+                            <div className="bg-white p-4 rounded-xl border-2 border-dashed border-gray-200 flex items-center justify-center text-gray-400 aspect-square">
+                                {/* Since we don't have real QRs, we'll check if the path ends in png/jpg, otherwise show a placeholder icon */}
+                                {selectedQR.src && (selectedQR.src.endsWith('.png') || selectedQR.src.endsWith('.jpg')) ? (
+                                    <img src={selectedQR.src} alt={`${selectedQR.name} QR Code`} className="w-full h-full object-contain" onError={(e) => {
+                                        e.target.style.display = 'none';
+                                        e.target.nextSibling.style.display = 'flex';
+                                    }} />
+                                ) : null}
+                                <div className="hidden flex-col items-center justify-center text-center">
+                                    <QrCode size={64} className="mb-2 opacity-20" />
+                                    <p className="text-sm">QR Code Image Not Found</p>
+                                </div>
+                            </div>
+                            <p className="text-center text-sm text-gray-500 mt-4">
+                                Scan to view {selectedQR.name} details on your mobile device.
+                            </p>
+                        </motion.div>
+                    </motion.div>
                 )}
             </AnimatePresence>
 

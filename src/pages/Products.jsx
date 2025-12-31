@@ -3,6 +3,7 @@ import { useSearchParams, Link } from 'react-router-dom';
 import { Search, Filter, ChevronDown, Download, Leaf, Droplets, Sun, Info, X, ShoppingBag, ArrowRight, Star, ChevronLeft, ChevronRight, Loader2 } from 'lucide-react';
 import { products } from '../data/products';
 import { motion, AnimatePresence } from 'framer-motion';
+import Fuse from 'fuse.js';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
@@ -67,12 +68,25 @@ const Products = () => {
 
     const categories = ['All', ...new Set(products.map(p => p.category))];
 
-    const filteredProducts = products.filter(p => {
-        const matchesCategory = activeCategory === 'All' || p.category === activeCategory;
-        const matchesSearch = p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            p.description.toLowerCase().includes(searchTerm.toLowerCase());
-        return matchesCategory && matchesSearch;
-    });
+    const fuse = useMemo(() => new Fuse(products, {
+        keys: ['name', 'description', 'category', 'subcategory', 'features', 'keywords'],
+        threshold: 0.3,
+        includeScore: true
+    }), []);
+
+    const filteredProducts = useMemo(() => {
+        let results = products;
+
+        if (searchTerm) {
+            const fuseResults = fuse.search(searchTerm);
+            results = fuseResults.map(result => result.item);
+        }
+
+        return results.filter(p => {
+            const matchesCategory = activeCategory === 'All' || p.category === activeCategory;
+            return matchesCategory;
+        });
+    }, [searchTerm, activeCategory, fuse]);
 
     useEffect(() => {
         if (categoryParam) setActiveCategory(categoryParam);

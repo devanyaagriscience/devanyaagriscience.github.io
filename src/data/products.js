@@ -9,7 +9,8 @@ export const products = [
         description: "A high-performing research paddy variety designed for optimal yield in varying soil conditions. DAS 300 offers excellent grain stability and moderate resistance to common field pests, making it a reliable choice for consistent harvests.",
         features: ["High Yield Potential", "Stress Tolerant", "Uniform Grain Size"],
         brochureUrl: "#",
-        article: "/assets/information/markdown/products/paddy-das-300.md"
+        article: "/assets/information/markdown/products/paddy-das-300.md",
+        keywords: ["Rice", "Chawal", "Dhaan", "Yield", "Pest Resistant", "Research Variety"]
     },
     {
         id: 2,
@@ -20,7 +21,8 @@ export const products = [
         description: "DAS 6060 is a short-to-medium duration variety that delivers robust performance. Known for its strong stem and non-lodging character, it ensures your crop stands tall until harvest, maximizing your return on investment.",
         features: ["Non-Lodging", "Good Mill Quality", "Early Maturity"],
         brochureUrl: "#",
-        article: "/assets/information/markdown/products/paddy-das-6060.md"
+        article: "/assets/information/markdown/products/paddy-das-6060.md",
+        keywords: ["Rice", "Chawal", "Dhaan", "Short Duration", "Non-Lodging", "Strong Stem", "Early", "Maturity"]
     },
     {
         id: 3,
@@ -31,7 +33,8 @@ export const products = [
         description: "An exceptional variety for farmers seeking premium grain quality. DAS 8028 produces slightly slender grains with a great cooking profile, attracting better market prices while maintaining high field productivity.",
         features: ["Premium Grain", "Market Preferred", "High Tillering"],
         brochureUrl: "#",
-        article: "/assets/information/markdown/products/paddy-das-8028.md"
+        article: "/assets/information/markdown/products/paddy-das-8028.md",
+        keywords: ["Rice", "Chawal", "Dhaan", "Premium", "Slender", "Tasty", "Cooking", "Fine Grain"]
     },
     {
         id: 4,
@@ -42,7 +45,8 @@ export const products = [
         description: "Built for resilience, DAS 8040 combines disease resistance with high output. It performs exceptionally well in irrigated belts, offering a dense panicle structure that translates to heavier weighing bags.",
         features: ["Disease Resistance", "Heavy Panicles", "High Test Weight"],
         brochureUrl: "#",
-        article: "/assets/information/markdown/products/paddy-das-8040.md"
+        article: "/assets/information/markdown/products/paddy-das-8040.md",
+        keywords: ["Rice", "Chawal", "Dhaan", "Disease Resistant", "Heavy", "High Output", "Irrigated"]
     },
     {
         id: 5,
@@ -53,7 +57,8 @@ export const products = [
         description: "A flagship research variety known for its versatility and bumper yields. DAS 8888 adapts well to different sowing windows and provides grains that swell beautifully upon cooking, making it a favorite for households.",
         features: ["Adaptable", "Bumper Yield", "Excellent Cooking"],
         brochureUrl: "#",
-        article: "/assets/information/markdown/products/paddy-das-8888.md"
+        article: "/assets/information/markdown/products/paddy-das-8888.md",
+        keywords: ["Rice", "Chawal", "Dhaan", "Bumper Yield", "Versatile", "Cooking", "Household"]
     },
     {
         id: 6,
@@ -68,7 +73,8 @@ export const products = [
         description: "The 'Buddha Rice', an ancient and prestigious aromatic variety. Our improved Kala Namak section preserves the authentic nutty aroma and nutritional richness while enhancing the crop's standability and yield.",
         features: ["Exotic Aroma", "Iron Rich", "Gourmet Quality"],
         brochureUrl: "#",
-        article: "/assets/information/markdown/products/paddy-kala-namak.md"
+        article: "/assets/information/markdown/products/paddy-kala-namak.md",
+        keywords: ["Rice", "Chawal", "Dhaan", "Aromatic", "Scented", "Buddha Rice", "Iron", "Nutrition", "Black Rice", "Basmati alternative"]
     },
     // Onion
     {
@@ -80,7 +86,8 @@ export const products = [
         description: "A top-tier selection for long-term storage. Fursungi bulbs are distinctively uniform, deep red, and possess tight layers that prevent spoilage, ensuring farmers can hold stock for better market timing.",
         features: ["Long Storage", "Dark Red Color", "Export Quality"],
         brochureUrl: "#",
-        article: "/assets/information/markdown/products/onion-fursungi.md"
+        article: "/assets/information/markdown/products/onion-fursungi.md",
+        keywords: ["Pyaz", "Kanda", "Red Onion", "Storage", "Export", "Long keeping"]
     },
     {
         id: 8,
@@ -91,7 +98,8 @@ export const products = [
         description: "The classic pungent onion beloved for its intense flavor. Gavran is hardy and thrives in local conditions, producing medium-sized bulbs with a strong aroma that is essential for traditional Indian cuisine.",
         features: ["High Pungency", "Drought Hardy", "Traditional Flavor"],
         brochureUrl: "#",
-        article: "/assets/information/markdown/products/onion-gavran.md"
+        article: "/assets/information/markdown/products/onion-gavran.md",
+        keywords: ["Pyaz", "Kanda", "Desi", "Pungent", "Spicy", "Drought Tolerant", "Local"]
     },
     {
         id: 9,
@@ -102,7 +110,8 @@ export const products = [
         description: "The ideal choice for the Kharif season. N-53 matures quickly and delivers bright red, globular bulbs. It allows farmers to capture the early market prices with a fresh, high-quality harvest.",
         features: ["Kharif Special", "Early Harvest", "Bright Red"],
         brochureUrl: "#",
-        article: "/assets/information/markdown/products/onion-n-53.md"
+        article: "/assets/information/markdown/products/onion-n-53.md",
+        keywords: ["Pyaz", "Kanda", "Kharif", "Early", "Red", "Monsoon"]
     },
     // Urad (Pulses)
     {
@@ -114,7 +123,8 @@ export const products = [
         description: "A trusted heavy-yielder in the black gram category. PU-31 is resistant to Yellow Mosaic Virus and produces bold, black seeds. It is a robust cropper perfect for rotation or main season cultivation.",
         features: ["YMV Resistant", "Bold Seeds", "High Protein"],
         brochureUrl: "#",
-        article: "/assets/information/markdown/products/urad-pu-31.md"
+        article: "/assets/information/markdown/products/urad-pu-31.md",
+        keywords: ["Dal", "Pulse", "Black Gram", "Urad Bean", "Protein", "Resistant", "YMV"]
     },
     {
         id: 11,
@@ -125,7 +135,8 @@ export const products = [
         description: "An improved variety focusing on ease of harvesting and disease tolerance. Shekher-2 offers synchronized pod maturity, reducing labor costs and ensuring a cleaner, higher-grade produce.",
         features: ["Synchronized Maturity", "Disease Tolerant", "Easy Harvest"],
         brochureUrl: "#",
-        article: "/assets/information/markdown/products/urad-shekher-2.md"
+        article: "/assets/information/markdown/products/urad-shekher-2.md",
+        keywords: ["Dal", "Pulse", "Black Gram", "Harvest", "Easy", "Disease Tolerant", "Synchronized"]
     },
     // Mustard
     {
@@ -137,7 +148,8 @@ export const products = [
         description: "A powerhouse oilseed variety. DAS 4747 is bred for high oil content and vigorous pod setting. Its bold seeds and sturdy plants ensure a profitable crush for oil millers and farmers alike.",
         features: ["High Oil %", "Bold Seeds", "Frost Tolerant"],
         brochureUrl: "#",
-        article: "/assets/information/markdown/products/mustard-das-4747.md"
+        article: "/assets/information/markdown/products/mustard-das-4747.md",
+        keywords: ["Sarso", "Oilseed", "Oil", "Rai", "Frost Tolerant", "Bold"]
     },
     // Pea
     {
@@ -149,7 +161,8 @@ export const products = [
         description: "For the freshest, sweetest garden peas. This variety produces long, well-filled pods with tender green peas that are perfect for the fresh market. It fetches a premium for its taste and visual appeal.",
         features: ["Sweet & Tender", "Long Pods", "Market Favorite"],
         brochureUrl: "#",
-        article: "/assets/information/markdown/products/pea-sweet-green.md"
+        article: "/assets/information/markdown/products/pea-sweet-green.md",
+        keywords: ["Matar", "Green Pea", "Vegetable", "Sweet", "Garden Pea"]
     },
     // Sudan
     {
@@ -161,6 +174,7 @@ export const products = [
         description: "The ultimate solution for dairy farmers. Sudan White grows rapidly and regenerates quickly after cutting, providing lush, palatable green fodder that boosts milk production in cattle.",
         features: ["Multi-Cut", "High Protein Fodder", "Fast Growth"],
         brochureUrl: "#",
-        article: "/assets/information/markdown/products/sudan-white.md"
+        article: "/assets/information/markdown/products/sudan-white.md",
+        keywords: ["Fodder", "Grass", "Cattle Feed", "Dairy", "Milk", "Chara", "Fast Growth"]
     }
 ];

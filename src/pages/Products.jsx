@@ -506,7 +506,7 @@ const Products = () => {
                             <h3 className="text-lg font-bold text-gray-900 mb-4 text-center">Scan QR Code</h3>
                             <div className="bg-white p-4 rounded-xl border-2 border-dashed border-gray-200 flex items-center justify-center text-gray-400 aspect-square">
                                 {/* Since we don't have real QRs, we'll check if the path ends in png/jpg, otherwise show a placeholder icon */}
-                                {selectedQR.src && (selectedQR.src.endsWith('.png') || selectedQR.src.endsWith('.jpg')) ? (
+                                {selectedQR.src && (selectedQR.src.endsWith('.png') || selectedQR.src.endsWith('.jpg') || selectedQR.src.endsWith('.jpeg')) ? (
                                     <img src={selectedQR.src} alt={`${selectedQR.name} QR Code`} className="w-full h-full object-contain" onError={(e) => {
                                         e.target.style.display = 'none';
                                         e.target.nextSibling.style.display = 'flex';

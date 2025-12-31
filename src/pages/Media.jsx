@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Image, Play, Calendar, MapPin } from 'lucide-react';
+import { Image, Play, Calendar, MapPin, Loader2 } from 'lucide-react';
 import Carousel from '../components/Carousel';
 import { events } from '../data/events';
 import { photos, videos } from '../data/mediaData';
@@ -8,6 +10,26 @@ import { photos, videos } from '../data/mediaData';
 const Media = () => {
     const [selectedMedia, setSelectedMedia] = useState(null);
     const [activeTab, setActiveTab] = useState('photos');
+    const [articleContent, setArticleContent] = useState('');
+    const [loadingArticle, setLoadingArticle] = useState(false);
+
+    useEffect(() => {
+        if (selectedMedia?.article) {
+            setLoadingArticle(true);
+            fetch(selectedMedia.article)
+                .then(res => res.text())
+                .then(text => {
+                    setArticleContent(text);
+                    setLoadingArticle(false);
+                })
+                .catch(err => {
+                    console.error("Error fetching article", err);
+                    setLoadingArticle(false);
+                });
+        } else {
+            setArticleContent('');
+        }
+    }, [selectedMedia]);
 
     return (
         <div className="min-h-screen bg-[var(--color-surface)] pb-20 pt-20">
@@ -252,9 +274,17 @@ const Media = () => {
                                         <h3 className="text-2xl font-bold text-gray-800 mb-4">
                                             {selectedMedia.type === 'photo' ? selectedMedia.caption : selectedMedia.title}
                                         </h3>
-                                        <p className="text-gray-600 text-lg leading-relaxed">
+                                        <p className="text-gray-600 text-lg leading-relaxed mb-6">
                                             {selectedMedia.description || "No description available."}
                                         </p>
+
+                                        {loadingArticle ? (
+                                            <div className="flex justify-center py-4"><Loader2 className="animate-spin" /></div>
+                                        ) : articleContent && (
+                                            <div className="prose prose-green max-w-none mt-8 pt-8 border-t border-gray-100">
+                                                <ReactMarkdown remarkPlugins={[remarkGfm]}>{articleContent}</ReactMarkdown>
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                             </motion.div>

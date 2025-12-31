@@ -4,12 +4,15 @@ import { Search, Filter, ChevronDown, Download, Leaf, Droplets, Sun, Info, X, Sh
 import { products } from '../data/products';
 import { motion, AnimatePresence } from 'framer-motion';
 
+import ArticleModal from '../components/ArticleModal';
+
 const Products = () => {
     const [searchParams] = useSearchParams();
     const categoryParam = searchParams.get('cat');
     const [activeCategory, setActiveCategory] = useState(categoryParam || 'All');
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedProduct, setSelectedProduct] = useState(null);
+    const [articleProduct, setArticleProduct] = useState(null);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
     const openModal = (product) => {
@@ -302,7 +305,15 @@ const Products = () => {
                                 </div>
 
                                 <div className="flex flex-col sm:flex-row gap-4 mt-8 pt-10 border-t border-gray-100">
-                                    <Link to="/contact" className="btn btn-primary flex-1 shadow-2xl py-5 text-xl rounded-2xl">
+                                    {selectedProduct.article && (
+                                        <button
+                                            onClick={() => setArticleProduct(selectedProduct)}
+                                            className="btn btn-primary flex-1 shadow-2xl py-5 text-xl rounded-2xl"
+                                        >
+                                            Read Full Article
+                                        </button>
+                                    )}
+                                    <Link to="/contact" className={`btn ${selectedProduct.article ? 'bg-gray-100 text-gray-800' : 'btn-primary'} flex-1 shadow-xl py-5 text-xl rounded-2xl flex items-center justify-center`}>
                                         Enquire Now
                                     </Link>
                                     <a
@@ -317,6 +328,13 @@ const Products = () => {
                     </div>
                 )}
             </AnimatePresence>
+
+            <ArticleModal
+                isOpen={!!articleProduct}
+                onClose={() => setArticleProduct(null)}
+                articlePath={articleProduct?.article}
+                title={articleProduct?.name}
+            />
         </div>
     );
 };

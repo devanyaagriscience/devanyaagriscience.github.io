@@ -43,9 +43,9 @@ const Navbar = () => {
                 <div className="flex items-center justify-between h-16">
                     <Link to="/" className="flex items-center gap-2 group">
                         <div className="bg-transparent p-1 rounded-lg">
-                            <img src="/assets/images/logo.JPG" alt="Devanya Agri Science Logo" className="h-10 w-10 rounded-full object-cover" />
+                            <img src="/assets/images/logo-transparent-bg.png" alt="Devanya Agri Science Logo" className="h-10 w-10 object-contain" />
                         </div>
-                        <span className="font-heading font-bold text-xl sm:text-2xl text-[var(--color-primary)] tracking-tight">
+                        <span className="font-heading font-bold text-lg sm:text-xl md:text-2xl text-[var(--color-primary)] tracking-tight">
                             Devanya<span className="text-[var(--color-accent)]"> Agri Science</span>
                         </span>
                     </Link>

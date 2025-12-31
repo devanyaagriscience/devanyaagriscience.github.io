@@ -63,7 +63,7 @@ const Careers = () => {
             {/* Open Positions */}
             <section className="section bg-gray-50">
                 <div className="container mx-auto px-4">
-                    <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-6">
+                    <div className="flex flex-col md:flex-row items-start md:items-end justify-between mb-16 gap-6">
                         <div className="max-w-2xl">
                             <span className="text-[var(--color-primary)] font-bold tracking-wider uppercase text-sm">Opportunities</span>
                             <h2 className="text-3xl md:text-5xl font-bold mt-4">Explore Open Roles</h2>
@@ -120,7 +120,7 @@ const Careers = () => {
                         <div className="relative z-10 max-w-3xl mx-auto">
                             <h2 className="text-3xl md:text-5xl font-bold mb-8">Passionate about agriculture?</h2>
                             <p className="text-gray-600 text-lg mb-12">We're always looking for field agents and technical advisors. Share your details with our HR team.</p>
-                            <a href="mailto:hr@devanyaagriscience.com" className="bg-white text-[var(--color-primary)] px-12 py-5 rounded-full font-bold text-xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all inline-block border border-gray-100">
+                            <a href="mailto:hr@devanyaagriscience.com" className="bg-white text-[var(--color-primary)] px-6 py-3 md:px-12 md:py-5 rounded-full font-bold text-sm sm:text-lg md:text-xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all inline-block border border-gray-100 break-all">
                                 hr@devanyaagriscience.com
                             </a>
                         </div>

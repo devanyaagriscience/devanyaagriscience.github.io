@@ -109,7 +109,7 @@ const Products = () => {
 
                 {/* Product Grid */}
                 {filteredProducts.length > 0 ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {filteredProducts.map((product, index) => (
                             <motion.div
                                 key={product.id}
@@ -122,7 +122,7 @@ const Products = () => {
                                     <img
                                         src={product.images && product.images.length > 0 ? product.images[0] : product.image}
                                         alt={product.name}
-                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                        className="w-full h-full object-contain p-4 transition-transform duration-700 group-hover:scale-110"
                                         onError={(e) => {
                                             e.target.style.display = 'none';
                                             e.target.nextSibling.style.display = 'flex';
@@ -232,7 +232,7 @@ const Products = () => {
                                 <img
                                     src={selectedProduct.images && selectedProduct.images.length > 0 ? selectedProduct.images[currentImageIndex] : selectedProduct.image}
                                     alt={selectedProduct.name}
-                                    className="w-full h-full object-contain md:object-cover transition-opacity duration-300"
+                                    className="w-full h-full object-contain transition-opacity duration-300"
                                     key={currentImageIndex}
                                     onError={(e) => {
                                         e.target.style.display = 'none';

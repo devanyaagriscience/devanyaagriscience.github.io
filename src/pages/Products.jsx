@@ -298,7 +298,7 @@ const Products = () => {
                             initial={{ opacity: 0, scale: 0.9, y: 40 }}
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.9, y: 40 }}
-                            className="bg-white rounded-[3rem] shadow-2xl w-full max-w-5xl overflow-hidden relative z-10 grid md:grid-cols-2 max-h-[90vh] overflow-y-auto"
+                            className="bg-white rounded-[3rem] shadow-2xl w-full max-w-4xl overflow-hidden relative z-10 flex flex-col max-h-[90vh] overflow-y-auto"
                         >
                             <button
                                 onClick={() => setSelectedProduct(null)}
@@ -308,7 +308,7 @@ const Products = () => {
                             </button>
 
                             <div
-                                className="bg-gray-50 min-h-[400px] md:h-full relative flex items-center justify-center p-0 overflow-hidden group/image"
+                                className="bg-gray-50 w-full aspect-square md:aspect-video min-h-[350px] relative flex items-center justify-center p-0 overflow-hidden group/image shrink-0"
                                 onMouseEnter={() => setIsAutoPlaying(false)}
                                 onMouseLeave={() => setIsAutoPlaying(true)}
                             >
@@ -401,21 +401,21 @@ const Products = () => {
                                 </div>
                             </div>
 
-                            <div className="p-10 md:p-16 flex flex-col">
+                            <div className="p-8 md:p-12 flex flex-col">
                                 <div className="mb-auto">
                                     <span className="text-[var(--color-accent-dark, #854d0e)] font-black text-xs tracking-[0.2em] uppercase mb-4 block">{selectedProduct.category}</span>
-                                    <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900 leading-tight">{selectedProduct.name}</h2>
-                                    <p className="text-gray-600 text-xl leading-relaxed mb-10">{selectedProduct.description}</p>
+                                    <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900 leading-tight">{selectedProduct.name}</h2>
+                                    <p className="text-gray-600 text-lg leading-relaxed mb-8">{selectedProduct.description}</p>
 
-                                    <div className="mb-12">
+                                    <div className="mb-10">
                                         <h4 className="font-bold text-gray-900 mb-6 uppercase tracking-widest text-xs">Technical Specifications</h4>
-                                        <ul className="grid grid-cols-1 gap-4">
+                                        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                             {selectedProduct.features.map((feature, i) => (
                                                 <li key={i} className="flex items-center gap-4 text-gray-700 group">
                                                     <div className="w-8 h-8 rounded-xl bg-green-50 flex items-center justify-center flex-shrink-0 group-hover:bg-[var(--color-primary)] transition-colors">
                                                         <Star className="w-4 h-4 text-[var(--color-primary)] group-hover:text-white transition-colors fill-current" />
                                                     </div>
-                                                    <span className="text-lg font-medium">{feature}</span>
+                                                    <span className="text-base font-medium">{feature}</span>
                                                 </li>
                                             ))}
                                         </ul>
@@ -427,14 +427,14 @@ const Products = () => {
                                         <Loader2 className="animate-spin text-gray-400" size={32} />
                                     </div>
                                 ) : articleContent && (
-                                    <div className="prose prose-sm md:prose-base dark:prose-invert max-w-none mt-8 pt-8 border-t border-gray-100">
+                                    <div className="prose prose-sm prose-p:text-gray-800 prose-headings:text-gray-900 prose-li:text-gray-800 prose-strong:text-gray-900 max-w-none mt-4 pt-8 border-t border-gray-100">
                                         <h4 className="font-bold text-gray-900 mb-4 uppercase tracking-widest text-xs">Detailed Information</h4>
                                         <ReactMarkdown remarkPlugins={[remarkGfm]}>{articleContent}</ReactMarkdown>
                                     </div>
                                 )}
 
                                 <div className="flex flex-col sm:flex-row gap-4 mt-8 pt-10 border-t border-gray-100">
-                                    <Link to="/contact" className="btn btn-primary flex-1 shadow-xl py-5 text-xl rounded-2xl flex items-center justify-center">
+                                    <Link to="/contact" className="btn btn-primary flex-1 shadow-xl py-4 text-lg rounded-2xl flex items-center justify-center">
                                         Enquire Now
                                     </Link>
                                     <a

@@ -3,63 +3,69 @@ export const faqs = [
     {
         id: 1,
         category: "General",
-        question: "Are your products environmentally safe?",
-        answer: "Yes, our 'Bio-Active Series' products are certified eco-safe. We also offer integrated pest management solutions that are eco-friendly."
+        question: "What types of crops does Devanya Agri Science specialize in?",
+        answer: "We specialize in a wide range of high-yielding field crops including Paddy, Maize, Bajra, and Wheat, as well as premium vegetable varieties designed for diverse climatic conditions."
     },
     {
         id: 2,
         category: "General",
-        question: "Where is your research center located?",
-        answer: "Our primary R&D facility is located in Nashik, Maharashtra, with helper stations across different climatic zones in India."
+        question: "Are your seeds certified and tested?",
+        answer: "Yes, all our seeds undergo rigorous quality control checks and are certified to meet or exceed national standards for purity, germination, and vigour."
+    },
+    {
+        id: 3,
+        category: "General",
+        question: "Do you focus on sustainable agriculture?",
+        answer: "Absolutely. Our R&D focuses on developing disease-resistant and climate-resilient varieties that reduce the need for excessive chemical inputs, promoting sustainable farming practices."
     },
 
     // For Farmers
     {
-        id: 3,
-        category: "Farmers",
-        question: "What is the best sowing time for 'Paddy DAS 300'?",
-        answer: "For optimal yield, we recommend sowing DAS 300 between June 15th and July 10th for Kharif season. Ensure soil moisture is adequate before sowing."
-    },
-    {
         id: 4,
         category: "Farmers",
-        question: "Do you provide on-field guidance?",
-        answer: "Yes, our expert agronomists visit farms to provide tailored advice on crop management, disease control, and yield optimization. Contact our support to schedule a visit."
+        question: "How do I choose the right crop variety for my region?",
+        answer: "Our expert team can help you select the best variety based on your local soil type, water availability, and sowing season. Please contact our local representative or customer support for guidance."
     },
     {
         id: 5,
         category: "Farmers",
-        question: "How can I get a soil test done?",
-        answer: "You can book a soil collection slot through our website or visit our nearest center. We provide a detailed report within 3-5 days."
+        question: "Do you provide technical guidance after purchase?",
+        answer: "Yes, we are committed to your success. Our agronomists provide on-field guidance and technical support throughout the crop cycle to help you maximize your yield."
     },
     {
         id: 6,
         category: "Farmers",
-        question: "Which onion variety has the longest storage life?",
-        answer: "'Onion Fursungi' is our best variety for storage. With proper curing, it can be stored for 6-8 months without significant weight loss or sprouting."
+        question: "Where can I find information about sowing and crop management?",
+        answer: "Detailed agronomy guides and package of practices for each variety are available on our website. You can also attend our farmer training programs for practical knowledge."
+    },
+    {
+        id: 7,
+        category: "Farmers",
+        question: "Who should I contact if I face issues with the crop?",
+        answer: "You can reach out to our dedicated helpline or visit your nearest authorized dealer. Our technical team acts swiftly to diagnose issues and suggest effective remedies."
     },
 
     // For Wholesalers
     {
-        id: 7,
-        category: "Wholesalers",
-        question: "How do I become an authorized dealer?",
-        answer: "To become a dealer, you need to submit a dealership application along with your GST registration and Seed License. Contact our Sales Head at +91-1234567890 for the application form."
-    },
-    {
         id: 8,
         category: "Wholesalers",
-        question: "Do you offer bulk delivery?",
-        answer: "Absolutely. We supply to individual farmers as well as large cooperatives. We have a dedicated logistics network for bulk orders exceeding 1 ton."
+        question: "How do I become an authorized dealer?",
+        answer: "To become a dealer, you need to submit a dealership application along with your GST registration and Seed License. Contact our Sales Team through the website or helpline for the application form."
     },
     {
         id: 9,
         category: "Wholesalers",
-        question: "What is the credit policy for distributors?",
-        answer: "We offer a 30-day credit period for authorized distributors with a good payment history. New partners may require advance payment for the first three transactions."
+        question: "Do you offer bulk delivery?",
+        answer: "Absolutely. We supply to individual farmers as well as large cooperatives. We have a dedicated logistics network for bulk orders to ensure timely delivery."
     },
     {
         id: 10,
+        category: "Wholesalers",
+        question: "What is the credit policy for distributors?",
+        answer: "We offer competitive credit terms for authorized distributors with a good payment history. New partners may require advance payment for the first few transactions."
+    },
+    {
+        id: 11,
         category: "Wholesalers",
         question: "Can I get promotional material for my shop?",
         answer: "Yes, we provide banners, posters, and product brochures free of cost to our retail partners to help them market our products effectively."

@@ -162,7 +162,11 @@ const Contact = () => {
                         </div>
                         <h3 className="text-xl font-bold text-gray-800 mb-2">Visit Us</h3>
                         <p className="text-gray-500 mb-4 text-sm">Come say hello at our HQ</p>
-                        <p className="text-lg font-medium text-gray-700 leading-snug">{companyInfo.address}</p>
+                        <div className="space-y-4">
+                            <div>
+                                <p className="text-gray-600 leading-snug text-sm">{companyInfo.headOfficeAddress}</p>
+                            </div>
+                        </div>
                     </motion.div>
                 </div>
 

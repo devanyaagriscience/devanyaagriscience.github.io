@@ -23,16 +23,15 @@ const Carousel = ({ items, renderItem, className = "" }) => {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
+    const maxIndex = items.length - visibleItems;
+
     const nextSlide = () => {
-        setCurrentIndex((prev) => (prev + 1) % (items.length - visibleItems + 1));
+        setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
     };
 
     const prevSlide = () => {
-        setCurrentIndex((prev) => (prev === 0 ? 0 : prev - 1));
+        setCurrentIndex((prev) => (prev === 0 ? maxIndex : prev - 1));
     };
-
-    const isEnd = currentIndex >= items.length - visibleItems;
-    const isStart = currentIndex === 0;
 
     if (!items || items.length === 0) return null;
 
@@ -66,36 +65,22 @@ const Carousel = ({ items, renderItem, className = "" }) => {
             {/* Navigation Buttons - Show only if there are more items than visible */}
             {items.length > visibleItems && (
                 <>
-                    {!isStart && (
-                        <button
-                            onClick={prevSlide}
-                            className="absolute left-0 top-1/2 -translate-y-1/2 -ml-4 md:-ml-6 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-800 hover:text-[var(--color-primary)] hover:scale-110 transition-all z-10"
-                            aria-label="Previous slide"
-                        >
-                            <ChevronLeft className="w-6 h-6" />
-                        </button>
-                    )}
+                    <button
+                        onClick={prevSlide}
+                        className="absolute left-0 top-1/2 -translate-y-1/2 -ml-4 md:-ml-6 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-800 hover:text-[var(--color-primary)] hover:scale-110 transition-all z-10"
+                        aria-label="Previous slide"
+                    >
+                        <ChevronLeft className="w-6 h-6" />
+                    </button>
 
-                    {!isEnd && (
-                        <button
-                            onClick={nextSlide}
-                            className="absolute right-0 top-1/2 -translate-y-1/2 -mr-4 md:-mr-6 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-800 hover:text-[var(--color-primary)] hover:scale-110 transition-all z-10"
-                            aria-label="Next slide"
-                        >
-                            <ChevronRight className="w-6 h-6" />
-                        </button>
-                    )}
+                    <button
+                        onClick={nextSlide}
+                        className="absolute right-0 top-1/2 -translate-y-1/2 -mr-4 md:-mr-6 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-800 hover:text-[var(--color-primary)] hover:scale-110 transition-all z-10"
+                        aria-label="Next slide"
+                    >
+                        <ChevronRight className="w-6 h-6" />
+                    </button>
                 </>
-            )}
-
-            {!isEnd && (
-                <button
-                    onClick={nextSlide}
-                    className="absolute right-0 top-1/2 -translate-y-1/2 -mr-4 md:-mr-6 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-800 hover:text-[var(--color-primary)] hover:scale-110 transition-all z-10"
-                    aria-label="Next slide"
-                >
-                    <ChevronRight className="w-6 h-6" />
-                </button>
             )}
         </div>
     );

@@ -2,7 +2,8 @@ export const companyInfo = {
     name: "Devanya Agri Science",
     tagline: "Every Seed, A Promise of Purity",
     description: "A leading producer of all kinds of grain seeds, committed to agricultural excellence and scientific innovation.",
-    address: "Gut No. 125, 136, 137, At Tapowan Tal, Bhokardan Jalna (MS), 431203",
+    corporateAddress: "Gut No. 125, 136, 137, At. Tapowan Tal., Bhokardan, Jalna, Maharashtra, 431203",
+    headOfficeAddress: "Pristine Prolife-1, Shankar Kalat Nagar, Wakad, Pimpri-Chinchwad, Maharashtra, 411057",
     email: "info@devanyaagriscience.com",
     phone: "1800-571-2333",
     website: "www.devanyaagriscience.com",
@@ -12,5 +13,14 @@ export const companyInfo = {
         linkedin: "https://www.linkedin.com/company/devanyaagriscience",
         instagram: "https://www.instagram.com/devanyaagriscience",
         youtube: "https://www.youtube.com/@DevanyaAgriScience"
-    }
+    },
+    businessHours: [
+        { day: 'Monday', time: '10:00 AM - 6:00 PM' },
+        { day: 'Tuesday', time: '10:00 AM - 6:00 PM' },
+        { day: 'Wednesday', time: '10:00 AM - 6:00 PM' },
+        { day: 'Thursday', time: '10:00 AM - 6:00 PM' },
+        { day: 'Friday', time: '10:00 AM - 6:00 PM' },
+        { day: 'Saturday', time: '10:00 AM - 4:00 PM' },
+        { day: 'Sunday', time: 'Closed' }
+    ]
 };

@@ -3,78 +3,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Image, Play, Calendar, MapPin } from 'lucide-react';
 import Carousel from '../components/Carousel';
 import { events } from '../data/events';
+import { photos, videos } from '../data/mediaData';
 
 const Media = () => {
+    const [selectedMedia, setSelectedMedia] = useState(null);
     const [activeTab, setActiveTab] = useState('photos');
-
-    const photos = [
-        {
-            id: 1,
-            url: "https://images.unsplash.com/photo-1595856947231-1587ee11a686?q=80&w=800&auto=format&fit=crop",
-            caption: "Annual Farmer Meet 2024",
-            location: "Varanasi, UP",
-            date: "Nov 15, 2024"
-        },
-        {
-            id: 2,
-            url: "https://images.unsplash.com/photo-1628352081506-83c43123ed6d?q=80&w=800&auto=format&fit=crop",
-            caption: "New Research Center Inauguration",
-            location: "Lucknow, UP",
-            date: "Oct 02, 2024"
-        },
-        {
-            id: 3,
-            url: "https://images.unsplash.com/photo-1599596426463-afc75a3ab65a?q=80&w=800&auto=format&fit=crop",
-            caption: "Field Demonstration Day",
-            location: "Gorakhpur, UP",
-            date: "Sep 10, 2024"
-        },
-        {
-            id: 4,
-            url: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=800&auto=format&fit=crop",
-            caption: "Award Ceremony for Best Farmers",
-            location: "New Delhi",
-            date: "Aug 15, 2024"
-        },
-        {
-            id: 5,
-            url: "https://images.unsplash.com/photo-1530507629858-e4977d30e9e0?q=80&w=800&auto=format&fit=crop",
-            caption: "Sustainable Ag Tech Seminar",
-            location: "Virtual Event",
-            date: "July 20, 2024"
-        },
-        {
-            id: 6,
-            url: "https://images.unsplash.com/photo-1615811361263-68f890bad53c?q=80&w=800&auto=format&fit=crop",
-            caption: "Community Seed Distribution",
-            location: "Rural Bihar",
-            date: "June 05, 2024"
-        }
-    ];
-
-    const videos = [
-        {
-            id: 1,
-            thumbnail: "https://images.unsplash.com/photo-1492496913980-501348b61384?q=80&w=800&auto=format&fit=crop",
-            title: "The Future of Organic Farming",
-            duration: "12:30",
-            views: "1.2k views"
-        },
-        {
-            id: 2,
-            thumbnail: "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?q=80&w=800&auto=format&fit=crop",
-            title: "Success Stories: Ram Lal's Journey",
-            duration: "05:45",
-            views: "850 views"
-        },
-        {
-            id: 3,
-            thumbnail: "https://images.unsplash.com/photo-1535295972055-1c762f4483e5?q=80&w=800&auto=format&fit=crop",
-            title: "Devanya Agri Science Corporate Film",
-            duration: "03:20",
-            views: "5.4k views"
-        }
-    ];
 
     return (
         <div className="min-h-screen bg-[var(--color-surface)] pb-20 pt-20">
@@ -138,7 +71,10 @@ const Media = () => {
                             <Carousel
                                 items={photos}
                                 renderItem={(photo) => (
-                                    <div className="group relative overflow-hidden rounded-[2rem] shadow-sm hover:shadow-xl transition-all duration-300 bg-white h-full">
+                                    <div
+                                        onClick={() => setSelectedMedia({ type: 'photo', ...photo })}
+                                        className="group relative overflow-hidden rounded-[2rem] shadow-sm hover:shadow-xl transition-all duration-300 bg-white h-full cursor-pointer"
+                                    >
                                         <div className="h-64 overflow-hidden">
                                             <img
                                                 src={photo.url}
@@ -168,7 +104,10 @@ const Media = () => {
                             <Carousel
                                 items={videos}
                                 renderItem={(video) => (
-                                    <div className="group cursor-pointer h-full">
+                                    <div
+                                        onClick={() => setSelectedMedia({ type: 'video', ...video })}
+                                        className="group cursor-pointer h-full"
+                                    >
                                         <div className="relative rounded-[2rem] overflow-hidden mb-4 shadow-lg">
                                             <img
                                                 src={video.thumbnail}
@@ -185,7 +124,7 @@ const Media = () => {
                                             </span>
                                         </div>
                                         <h3 className="text-lg font-bold text-gray-800 mb-1 group-hover:text-[var(--color-primary)] transition-colors line-clamp-2">{video.title}</h3>
-                                        <p className="text-sm text-gray-500">{video.views} • Uploaded recently</p>
+                                        <p className="text-sm text-gray-500">Uploaded recently</p>
                                     </div>
                                 )}
                             />
@@ -243,6 +182,82 @@ const Media = () => {
                         </div>
                     </div>
                 </div>
+
+                {/* Media Modal */}
+                <AnimatePresence>
+                    {selectedMedia && (
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            onClick={() => setSelectedMedia(null)}
+                            className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4 backdrop-blur-md"
+                        >
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                                animate={{ opacity: 1, scale: 1, y: 0 }}
+                                exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                                onClick={(e) => e.stopPropagation()}
+                                className="bg-white rounded-3xl overflow-hidden max-w-4xl w-full max-h-[90vh] flex flex-col shadow-2xl relative"
+                            >
+                                <button
+                                    onClick={() => setSelectedMedia(null)}
+                                    className="absolute top-4 right-4 z-10 p-2 bg-black/50 text-white rounded-full hover:bg-black/70 transition-colors"
+                                >
+                                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
+
+                                <div className="flex-1 overflow-auto">
+                                    {selectedMedia.type === 'video' ? (
+                                        <div className="aspect-video bg-black flex items-center justify-center">
+                                            <video
+                                                controls
+                                                autoPlay
+                                                className="w-full h-full"
+                                                src={selectedMedia.videoUrl}
+                                                poster={selectedMedia.thumbnail}
+                                            >
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        </div>
+                                    ) : (
+                                        <div className="aspect-video bg-gray-100 flex items-center justify-center overflow-hidden">
+                                            <img
+                                                src={selectedMedia.url}
+                                                alt={selectedMedia.caption}
+                                                className="w-full h-full object-contain"
+                                            />
+                                        </div>
+                                    )}
+
+                                    <div className="p-8">
+                                        <div className="flex flex-wrap items-center gap-4 mb-4 text-sm text-[var(--color-primary)] font-bold uppercase tracking-wider">
+                                            {selectedMedia.type === 'photo' && (
+                                                <>
+                                                    <span className="flex items-center gap-1"><MapPin className="w-4 h-4" /> {selectedMedia.location}</span>
+                                                    <span className="flex items-center gap-1"><Calendar className="w-4 h-4" /> {selectedMedia.date}</span>
+                                                </>
+                                            )}
+                                            {selectedMedia.type === 'video' && (
+                                                <>
+                                                    <span>Duration: {selectedMedia.duration}</span>
+                                                </>
+                                            )}
+                                        </div>
+                                        <h3 className="text-2xl font-bold text-gray-800 mb-4">
+                                            {selectedMedia.type === 'photo' ? selectedMedia.caption : selectedMedia.title}
+                                        </h3>
+                                        <p className="text-gray-600 text-lg leading-relaxed">
+                                            {selectedMedia.description || "No description available."}
+                                        </p>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </div>
         </div>
     );

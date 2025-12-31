@@ -42,20 +42,28 @@ const Footer = () => {
                         <h4 className="text-xl font-bold mb-6 text-white font-heading">Quick Links</h4>
                         <ul className="space-y-4">
                             <li><Link to="/" className="text-gray-400 hover:text-[var(--color-accent)] transition-colors">Home</Link></li>
-                            <li><Link to="/products" className="text-gray-400 hover:text-[var(--color-accent)] transition-colors">Our Products</Link></li>
+                            <li><Link to="/products" className="text-gray-400 hover:text-[var(--color-accent)] transition-colors">Products</Link></li>
                             <li><Link to="/about" className="text-gray-400 hover:text-[var(--color-accent)] transition-colors">About Us</Link></li>
+                            <li><Link to="/media" className="text-gray-400 hover:text-[var(--color-accent)] transition-colors">Media</Link></li>
+                            <li><Link to="/contact" className="text-gray-400 hover:text-[var(--color-accent)] transition-colors">Contact</Link></li>
                             <li><Link to="/faq" className="text-gray-400 hover:text-[var(--color-accent)] transition-colors">FAQ</Link></li>
                             <li><Link to="/careers" className="text-gray-400 hover:text-[var(--color-accent)] transition-colors">Careers</Link></li>
-                            <li><Link to="/contact" className="text-gray-400 hover:text-[var(--color-accent)] transition-colors">Contact</Link></li>
                         </ul>
                     </div>
 
                     <div>
                         <h4 className="text-xl font-bold mb-6 text-white font-heading">Contact Us</h4>
                         <ul className="space-y-4 text-gray-400">
-                            <li>{companyInfo.address}</li>
-                            <li className="pt-2"><a href={`tel:${companyInfo.phone}`} className="hover:text-white">{companyInfo.phone}</a></li>
-                            <li><a href={`mailto:${companyInfo.email}`} className="hover:text-white">{companyInfo.email}</a></li>
+                            <li>
+                                <span className="block text-white font-semibold mb-1">Corporate Office:</span>
+                                {companyInfo.corporateAddress}
+                            </li>
+                            <li>
+                                <span className="block text-white font-semibold mb-1">Head Office:</span>
+                                {companyInfo.headOfficeAddress}
+                            </li>
+                            <li className="pt-2"><a href={`tel:${companyInfo.phone}`} className="hover:text-white"><span className="font-semibold text-white">Call:</span> {companyInfo.phone}</a></li>
+                            <li><a href={`mailto:${companyInfo.email}`} className="hover:text-white"><span className="font-semibold text-white">Mail:</span> {companyInfo.email}</a></li>
                         </ul>
                     </div>
 
@@ -64,18 +72,12 @@ const Footer = () => {
                         <h4 className="text-xl font-bold mb-6 text-white font-heading">Business Hours</h4>
                         <p className="text-gray-400 mb-4">Visit our center for expert consultation.</p>
                         <ul className="space-y-3 text-gray-400">
-                            <li className="flex justify-between">
-                                <span>Monday - Friday</span>
-                                <span className="text-white">10:00 AM - 6:00 PM</span>
-                            </li>
-                            <li className="flex justify-between">
-                                <span>Saturday</span>
-                                <span className="text-white">10:00 AM - 4:00 PM</span>
-                            </li>
-                            <li className="flex justify-between">
-                                <span>Sunday</span>
-                                <span className="text-[var(--color-accent)]">Closed</span>
-                            </li>
+                            {companyInfo.businessHours.map((item, index) => (
+                                <li key={index} className="flex justify-between">
+                                    <span>{item.day}</span>
+                                    <span className={item.time === 'Closed' ? "text-[var(--color-accent)]" : "text-white"}>{item.time}</span>
+                                </li>
+                            ))}
                         </ul>
                     </div>
                 </div>

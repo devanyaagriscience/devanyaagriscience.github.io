@@ -75,8 +75,8 @@ const FAQ = () => {
                                 key={cat}
                                 onClick={() => setActiveCategory(cat)}
                                 className={`px-6 py-2 rounded-full text-sm font-bold transition-all ${activeCategory === cat
-                                        ? 'bg-[var(--color-primary)] text-white shadow-lg scale-105'
-                                        : 'bg-white text-gray-500 hover:bg-gray-100'
+                                    ? 'bg-[var(--color-primary)] text-white shadow-lg scale-105'
+                                    : 'bg-white text-gray-500 hover:bg-gray-100'
                                     }`}
                             >
                                 {cat}
@@ -156,7 +156,7 @@ const FAQ = () => {
                         <p className="text-gray-300 text-lg mb-12">Our support team is always ready to assist you with technical guidance, product selection, or any other agricultural queries.</p>
                         <div className="flex flex-col sm:flex-row gap-6 justify-center">
                             <Link to="/contact" className="btn btn-accent px-10 py-4 text-lg border-none text-[#0f2f1c] hover:bg-white shadow-xl">Contact Support</Link>
-                            <a href="tel:1800-571-2333" className="btn btn-outline border-white text-white px-10 py-4 text-lg hover:bg-white hover:text-[#0f2f1c]">Call Us: 1800-571-2333</a>
+                            <a href="tel:1800-571-2333" className="btn btn-outline border-white !text-white px-10 py-4 text-lg hover:bg-white hover:text-[#0f2f1c]">Call Us: 1800-571-2333</a>
                         </div>
                     </div>
                 </div>

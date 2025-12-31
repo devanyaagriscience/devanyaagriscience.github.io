@@ -55,7 +55,7 @@ const About = () => {
                                     <p className="text-sm text-gray-500">Years of Experience</p>
                                 </div>
                                 <div className="p-4 bg-yellow-50 rounded-2xl">
-                                    <h4 className="text-2xl font-bold text-[var(--color-accent-dark, #854d0e)]">50k+</h4>
+                                    <h4 className="text-2xl font-bold text-[var(--color-accent-dark, #854d0e)]">5k+</h4>
                                     <p className="text-sm text-gray-500">Farmers Served</p>
                                 </div>
                             </div>
@@ -67,7 +67,7 @@ const About = () => {
                             className="relative"
                         >
                             <div className="aspect-square rounded-[3rem] overflow-hidden shadow-2xl">
-                                <img src="https://images.unsplash.com/photo-1592982537447-7440770cbfc9?q=80&w=2060&auto=format&fit=crop" alt="Agriculture Science" className="w-full h-full object-cover" />
+                                <img src="/assets/images/vision-journey.png" alt="Visionary Agricultural Science" className="w-full h-full object-cover" />
                             </div>
                             <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-3xl shadow-xl flex items-center gap-4 border border-gray-100">
                                 <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-green-600">

@@ -210,7 +210,7 @@ const Products = () => {
                                                     e.stopPropagation();
                                                     setSelectedVideo(product.video);
                                                 }}
-                                                className="bg-blue-600/90 hover:bg-blue-700 text-white backdrop-blur-md px-3 py-1.5 rounded-full text-[10px] uppercase tracking-widest font-bold shadow-sm flex items-center gap-1 transition-all hover:scale-105 z-20 cursor-pointer"
+                                                className="bg-[var(--color-primary)] hover:bg-green-800 text-white backdrop-blur-md px-3 py-1.5 rounded-full text-[10px] uppercase tracking-widest font-bold shadow-sm flex items-center gap-1 transition-all hover:scale-105 z-20 cursor-pointer"
                                             >
                                                 <div className="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></div> 3D View
                                             </button>
@@ -393,7 +393,7 @@ const Products = () => {
                                                 e.stopPropagation();
                                                 setSelectedVideo(getMediaItems(selectedProduct)[currentImageIndex].src);
                                             }}
-                                            className="bg-blue-600/90 hover:bg-blue-700 text-white backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold shadow-lg uppercase tracking-widest block w-fit transition-all cursor-pointer"
+                                            className="bg-[var(--color-primary)] hover:bg-green-800 text-white backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold shadow-lg uppercase tracking-widest block w-fit transition-all cursor-pointer"
                                         >
                                             3D View
                                         </button>

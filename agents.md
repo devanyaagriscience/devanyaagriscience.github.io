@@ -2,10 +2,9 @@ Generate short 3d video about each product using Veo and show on product carouse
 
 Update actual information of each product in the product page. Do the same for the events, media and article.
 
-Make 3D View color to green or yellow based on the theme but not blue.
+Why # is added in the URL path after the hostname?
 
-Also the detailed product information is greyed out, please make sure the markdown is rendered properly for each product 
+3D view is not in line with the product type tag .. 3d view is slightly up or product type is slightly down but not aligned horizonatally
 
-make sure the layout of the modal for products is similar to events, media and images ... where media is shown on top and infomation is below it (not side by side).
-
+Generate the QR data for some products randlomy and then shoe that
 

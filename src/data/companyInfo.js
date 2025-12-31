@@ -15,12 +15,12 @@ export const companyInfo = {
         youtube: "https://www.youtube.com/@DevanyaAgriScience"
     },
     businessHours: [
-        { day: 'Monday', time: '10:00 AM - 6:00 PM' },
-        { day: 'Tuesday', time: '10:00 AM - 6:00 PM' },
-        { day: 'Wednesday', time: '10:00 AM - 6:00 PM' },
-        { day: 'Thursday', time: '10:00 AM - 6:00 PM' },
-        { day: 'Friday', time: '10:00 AM - 6:00 PM' },
-        { day: 'Saturday', time: '10:00 AM - 4:00 PM' },
+        { day: 'Monday', time: '10 AM - 6 PM' },
+        { day: 'Tuesday', time: '10 AM - 6 PM' },
+        { day: 'Wednesday', time: '10 AM - 6 PM' },
+        { day: 'Thursday', time: '10 AM - 6 PM' },
+        { day: 'Friday', time: '10 AM - 6 PM' },
+        { day: 'Saturday', time: '10 AM - 4 PM' },
         { day: 'Sunday', time: 'Closed' }
     ]
 };

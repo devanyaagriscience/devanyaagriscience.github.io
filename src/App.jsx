@@ -9,6 +9,7 @@ import FAQ from './pages/FAQ';
 import Careers from './pages/Careers';
 import Contact from './pages/Contact';
 import Media from './pages/Media';
+import RedirectHandler from './components/RedirectHandler';
 
 function App() {
   return (
@@ -23,6 +24,8 @@ function App() {
           <Route path="/careers" element={<Careers />} />
           <Route path="/media" element={<Media />} />
           <Route path="/contact" element={<Contact />} />
+          {/* Short-link / QR redirect — slugs defined in src/data/urlMappings.js */}
+          <Route path="/r/:slug" element={<RedirectHandler />} />
         </Routes>
       </Layout>
     </BrowserRouter>

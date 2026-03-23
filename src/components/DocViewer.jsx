@@ -30,34 +30,16 @@ function DocViewer() {
     );
   }
 
-  /* ── Whitelisted ──────────────────────────────────────────────────────── */
+  /* ── PDF: redirect to raw file — no wrapper at all ───────────────────── */
+  if (doc.type === 'pdf') {
+    window.location.replace(doc.path);
+    return null;
+  }
+
+  /* ── Image / Video / Markdown: Devanya-branded viewer (no top ribbon) ── */
   return (
     <div style={styles.wrap}>
-      {/* Header bar */}
-      <div style={styles.header}>
-        <Link to="/" style={styles.logo}>
-          <img
-            src="/assets/images/logo-transparent-bg.png"
-            alt="Devanya Agri Science"
-            style={{ height: 36 }}
-            onError={e => { e.target.style.display = 'none'; }}
-          />
-          <span style={styles.logoText}>Devanya Agri Science</span>
-        </Link>
-        <div style={styles.meta}>
-          <span style={styles.tag}>{doc.type?.toUpperCase()}</span>
-          <a
-            href={doc.path}
-            download
-            style={styles.downloadBtn}
-            title="Download"
-          >
-            ⬇ Download
-          </a>
-        </div>
-      </div>
-
-      {/* Title & description */}
+      {/* Title & description — no logo/ribbon */}
       <div style={styles.titleBar}>
         <h1 style={styles.docTitle}>{doc.title}</h1>
         {doc.desc && <p style={styles.docDesc}>{doc.desc}</p>}
@@ -65,13 +47,6 @@ function DocViewer() {
 
       {/* Viewer */}
       <div style={styles.viewerWrap}>
-        {doc.type === 'pdf' && (
-          <iframe
-            src={doc.path}
-            title={doc.title}
-            style={styles.iframe}
-          />
-        )}
         {doc.type === 'image' && (
           <img
             src={doc.path}
@@ -88,7 +63,7 @@ function DocViewer() {
         {doc.type === 'markdown' && (
           <MarkdownViewer path={doc.path} />
         )}
-        {!['pdf', 'image', 'video', 'markdown'].includes(doc.type) && (
+        {!['image', 'video', 'markdown'].includes(doc.type) && (
           <div style={styles.fallback}>
             <p>Preview not available for this file type.</p>
             <a href={doc.path} style={styles.btn}>Open File</a>

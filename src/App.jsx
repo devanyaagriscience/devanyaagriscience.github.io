@@ -10,6 +10,7 @@ import Careers from './pages/Careers';
 import Contact from './pages/Contact';
 import Media from './pages/Media';
 import RedirectHandler from './components/RedirectHandler';
+import DocViewer from './components/DocViewer';
 
 function App() {
   return (
@@ -26,6 +27,8 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           {/* Short-link / QR redirect — slugs defined in src/data/urlMappings.js */}
           <Route path="/r/:slug" element={<RedirectHandler />} />
+          {/* Whitelisted document viewer — docs defined in src/data/sharedDocs.js */}
+          <Route path="/share/media/:slug" element={<DocViewer />} />
         </Routes>
       </Layout>
     </BrowserRouter>
